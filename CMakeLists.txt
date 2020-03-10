@@ -6,16 +6,9 @@ project(GlobalDefs
   LANGUAGES CXX
 )
 # Add the library target
-add_library(global_defs
-	include/global_defs/global_defs.h
-)
+add_library(global_defs INTERFACE)
 # Setup include directories 
-target_include_directories(global_defs PUBLIC 
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
- 	$<INSTALL_INTERFACE:include>
-)
-# Explicitly define the language
-set_target_properties(global_defs PROPERTIES LINKER_LANGUAGE CXX)
+target_include_directories(global_defs INTERFACE include/)
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# # Add the example target
