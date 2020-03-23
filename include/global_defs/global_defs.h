@@ -26,5 +26,15 @@ static constexpr float G2MSSf = G_MSSf;
 static constexpr double G2MSS = G_MSS;
 static constexpr float MSS2Gf = 1.0f / G_MSSf;
 static constexpr double MSS2G = 1.0 / G_MSS;
+static constexpr float LB2KGf = 0.45359237f; // lb to kg, defined
+static constexpr float IN2M = 0.0254; // inch to meter, defined
+static constexpr float PSI2PAf = (LB2KGf * G_MSSf) / (IN2M * IN2M);
+static constexpr float PA2PSIf = (IN2M * IN2M) / (LB2KGf * G_MSSf);
+static constexpr float ATM2PAf = 101325.0f;
+static constexpr float PA2ATMf = 1.0f / 101325.0f
+static constexpr float MBAR2PAf = 100.0f;
+static constexpr float PA2MBARf = 1.0f / 100.0f;
+static constexpr float INHG2PAf = 3386.389f;
+static constexpr float PA2INHGf = 1.0f / 3386.389f;
 
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
