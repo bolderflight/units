@@ -30,6 +30,7 @@ Constants are within the namespace *constants*.
 The following constants are defined as both single and double precision floats. An appended lower case *f* is used to specify a single precision float. For example *PI* defines pi as a double precision float whereas *PIf* is pi as a single precision float.
 
 **PI** pi.
+
 **G_MSS** Gravitional acceleration in units of m/s/s.
 
 ## Conversions
