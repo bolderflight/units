@@ -12,29 +12,69 @@
 #include <inttypes.h>
 
 /* Constants */
+namespace constants {
 static constexpr float G_MSSf = 9.80665f;
 static constexpr double G_MSS = 9.80665;
 static constexpr float PIf = 3.14159265358979323846f;
 static constexpr double PI = 3.14159265358979323846;
+}  // namespace constants
 
 /* Conversions */
-static constexpr float DEG2RADf = PIf / 180.0f;
-static constexpr double DEG2RAD = PI / 180.0;
-static constexpr float RAD2DEGf = 180.0f / PIf;
-static constexpr double RAD2DEG = 180.0 / PI;
-static constexpr float G2MSSf = G_MSSf;
-static constexpr double G2MSS = G_MSS;
-static constexpr float MSS2Gf = 1.0f / G_MSSf;
-static constexpr double MSS2G = 1.0 / G_MSS;
-static constexpr float LB2KGf = 0.45359237f; // lb to kg, defined
-static constexpr float IN2M = 0.0254; // inch to meter, defined
-static constexpr float PSI2PAf = (LB2KGf * G_MSSf) / (IN2M * IN2M);
-static constexpr float PA2PSIf = (IN2M * IN2M) / (LB2KGf * G_MSSf);
-static constexpr float ATM2PAf = 101325.0f;
-static constexpr float PA2ATMf = 1.0f / 101325.0f;
-static constexpr float MBAR2PAf = 100.0f;
-static constexpr float PA2MBARf = 1.0f / 100.0f;
-static constexpr float INHG2PAf = 3386.389f;
-static constexpr float PA2INHGf = 1.0f / 3386.389f;
+namespace conversions {
+/* Deg to Rad */
+float Deg2Rad(float deg);
+double Deg2Rad(double deg);
+/* Rad to Deg */
+float Rad2Deg(float rad);
+double Rad2Deg(double rad);
+/* G to m/s/s */
+float G2Mss(float g);
+double G2Mss(double g);
+/* m/s/s to G */
+float Mss2G(float mss);
+double Mss2G(double mss);
+/* PSI to Pa */
+float Psi2Pa(float psi);
+double Psi2Pa(double psi);
+/* Pa to PSI */
+float Pa2Psi(float pa);
+double Pa2Psi(double pa);
+/* atm to Pa */
+float Atm2Pa(float atm);
+double Atm2Pa(double atm);
+/* Pa to atm */
+float Pa2Atm(float pa);
+double Pa2Atm(double pa);
+/* mbar to Pa */
+float Mbar2Pa(float mbar);
+double Mbar2Pa(double mbar);
+/* Pa to mbar */
+float Pa2Mbar(float pa);
+double Pa2Mbar(double pa);
+/* inHg to Pa */
+float InHg2Pa(float inhg);
+double InHg2Pa(double inhg);
+/* Pa to inHg */
+float Pa2InHg(float pa);
+double Pa2InHg(double pa);
+/* C to F */
+float C2F(float c);
+double C2F(double c);
+/* F to C */
+float F2C(float f);
+double F2C(double f);
+/* C to K */
+float C2K(float c);
+double C2K(double c);
+/* K to C */
+float K2C(float k);
+double K2C(double k);
+/* F to R */
+float F2R(float f);
+double F2R(double f);
+/* R to F */
+float R2F(float r);
+double R2F(double r);
+}  // namespace conversions
 
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_

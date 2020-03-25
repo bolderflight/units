@@ -1,0 +1,32 @@
+stages:
+  - lint
+  - build
+  - test
+
+Lint:
+  stage: lint
+  tags:
+    - bfs
+  script: 
+    - cpplint.py --verbose=0 src/global_defs/global_defs.cc
+    - cpplint.py --verbose=0 include/global_defs/global_defs.h
+
+Compile:
+  stage: build
+  tags:
+    - bfs
+  script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+  artifacts:
+    paths:
+      - build/global_defs_test
+  
+Test Global Defs:
+  stage: test
+  tags:
+    - bfs
+  script:
+    - ./build/global_defs_test
