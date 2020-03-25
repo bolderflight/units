@@ -44,7 +44,7 @@ The following functions are available to convert between units. All functions ar
 **Rad2Deg(rad)** Converts radians to degrees.
 
 ```C++
-std::cout << conversions::Rad2Deg(PI) << std::endl; // 180.0
+std::cout << conversions::Rad2Deg(constants::PI) << std::endl; // 180.0
 ```
 
 **Deg2Rad(deg)** Converts degrees to radians.
@@ -86,7 +86,7 @@ std::cout << conversions::Atm2Pa(1.0f) << std::endl; // 101325.0f
 **Pa2Atm(pa)** Converts pressure in Pascal to Standard Atmospheres.
 
 ```C++
-std::cout << conversions::Pa2Atm(101325) << std::endl; // 1.0
+std::cout << conversions::Pa2Atm(101325.0) << std::endl; // 1.0
 ```
 
 **Mbar2Pa(mbar)** Converts pressure in millibars to Pascal.
