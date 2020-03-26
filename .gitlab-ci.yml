@@ -2,6 +2,7 @@ stages:
   - lint
   - build
   - test
+  - deploy
 
 Lint:
   stage: lint
@@ -30,3 +31,7 @@ Test Global Defs:
     - bfs
   script:
     - ./build/global_defs_test
+
+Staging:
+  stage: deploy
+  trigger: types
