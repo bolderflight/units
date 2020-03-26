@@ -34,4 +34,4 @@ Test Global Defs:
 
 Staging:
   stage: deploy
-  trigger: types
+  trigger: https://gitlab.com/bolderflight/software/types
