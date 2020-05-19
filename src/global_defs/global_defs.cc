@@ -10,7 +10,7 @@
 namespace conversions {
 
 float M2Ft(float m) {
- return m / 0.3048f;
+  return m / 0.3048f;
 }
 double M2Ft(double m) {
   return m / 0.3048;
@@ -20,7 +20,7 @@ float Ft2M(float ft) {
 }
 double Ft2M(double ft) {
   return ft * 0.3048;
-} 
+}
 float Deg2Rad(float deg) {
   return deg * constants::PIf / 180.0f;
 }
