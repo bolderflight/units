@@ -21,6 +21,12 @@ static constexpr double PI = 3.14159265358979323846;
 
 /* Conversions */
 namespace conversions {
+/* m to ft */
+float M2Ft(float m);
+double M2Ft(double m);
+/* ft to m */
+float Ft2M(float ft);
+double Ft2M(double ft);
 /* Deg to Rad */
 float Deg2Rad(float deg);
 double Deg2Rad(double deg);

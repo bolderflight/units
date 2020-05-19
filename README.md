@@ -41,6 +41,18 @@ Conversions are within the namepsace *conversions*.
 ### Functions
 The following functions are available to convert between units. All functions are overloaded between single and double precision floating point - if a single precision float is input, a single precision output is returned. Similarly if a double precision float is input, a double precision output is returned.
 
+**M2Ft(m)** Converts meters to feet.
+
+```C++
+std::cout << conversions::M2Ft(0.3048) << std::endl; // 1.0
+```
+
+**Ft2M(ft)** Converts feet to meters.
+
+```C++
+std::cout << conversions::Ft2M(1.0) << std::endl; // 0.3048
+```
+
 **Rad2Deg(rad)** Converts radians to degrees.
 
 ```C++

@@ -9,6 +9,16 @@
 #include "gtest/gtest.h"
 #include <math.h>
 
+/* M2Ft */
+TEST(M2Ft, M2Ft) {
+  EXPECT_FLOAT_EQ(1.0f, conversions::M2Ft(0.3048f));
+  EXPECT_DOUBLE_EQ(1.0, conversions::M2Ft(0.3048));
+}
+/* Ft2M */
+TEST(Ft2M, Ft2M) {
+  EXPECT_FLOAT_EQ(0.3048f, conversions::Ft2M(1.0f));
+  EXPECT_DOUBLE_EQ(0.3048, conversions::Ft2M(1.0));
+}
 /* Deg2Rad */
 TEST(Deg2Rad, Deg2Rad) {
   EXPECT_FLOAT_EQ(constants::PIf, conversions::Deg2Rad(180.0f));

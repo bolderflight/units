@@ -9,6 +9,8 @@
 #include <iostream>
 
 int main() {
+  std::cout << conversions::M2Ft(0.3048) << std::endl; // 1.0
+  std::cout << conversions::Ft2M(1.0) << std::endl; // 0.3048
   std::cout << conversions::Rad2Deg(constants::PI) << std::endl; // 180.0
   std::cout << conversions::Deg2Rad(180.0) << std::endl; // 3.14
   std::cout << conversions::G2Mss(1.0) << std::endl; // 9.80665
