@@ -9,148 +9,148 @@
 
 namespace conversions {
 
-float M2Ft(float m) {
+float M_to_Ft(float m) {
   return m / 0.3048f;
 }
-double M2Ft(double m) {
+double M_to_Ft(double m) {
   return m / 0.3048;
 }
-float Ft2M(float ft) {
+float Ft_to_M(float ft) {
   return ft * 0.3048f;
 }
-double Ft2M(double ft) {
+double Ft_to_M(double ft) {
   return ft * 0.3048;
 }
-float Deg2Rad(float deg) {
+float Deg_to_Rad(float deg) {
   return deg * constants::PIf / 180.0f;
 }
-double Deg2Rad(double deg) {
+double Deg_to_Rad(double deg) {
   return deg * constants::PI / 180.0;
 }
-float Rad2Deg(float rad) {
+float Rad_to_Deg(float rad) {
   return rad * 180.0f / constants::PIf;
 }
-double Rad2Deg(double rad) {
+double Rad_to_Deg(double rad) {
   return rad * 180.0 / constants::PI;
 }
-float G2Mss(float g) {
-  return constants::G_MSSf * g;
+float G_to_Mps2(float g) {
+  return constants::G_MPS2f * g;
 }
-double G2Mss(double g) {
-  return constants::G_MSS * g;
+double G_to_Mps2(double g) {
+  return constants::G_MPS2 * g;
 }
-float Mss2G(float mss) {
-  return mss / constants::G_MSSf;
+float Mps2_to_G(float mps2) {
+  return mps2 / constants::G_MPS2f;
 }
-double Mss2G(double mss) {
-  return mss / constants::G_MSS;
+double Mps2_to_G(double mps2) {
+  return mps2 / constants::G_MPS2;
 }
-float Psi2Pa(float psi) {
+float Psi_to_Pa(float psi) {
   /* lb to kg*/
   float lb2kg = 0.45359237f;
   /* in to m */
   float in2m = 0.0254f;
-  return psi * (lb2kg * constants::G_MSSf) / (in2m * in2m);
+  return psi * (lb2kg * constants::G_MPS2f) / (in2m * in2m);
 }
-double Psi2Pa(double psi) {
+double Psi_to_Pa(double psi) {
   /* lb to kg*/
   double lb2kg = 0.45359237;
   /* in to m */
   double in2m = 0.0254;
-  return psi * (lb2kg * constants::G_MSS) / (in2m * in2m);
+  return psi * (lb2kg * constants::G_MPS2) / (in2m * in2m);
 }
-float Pa2Psi(float pa) {
+float Pa_to_Psi(float pa) {
   /* lb to kg*/
   float lb2kg = 0.45359237f;
   /* in to m */
   float in2m = 0.0254f;
-  return pa * (in2m * in2m) / (lb2kg * constants::G_MSSf);
+  return pa * (in2m * in2m) / (lb2kg * constants::G_MPS2f);
 }
-double Pa2Psi(double pa) {
+double Pa_to_Psi(double pa) {
   /* lb to kg*/
   double lb2kg = 0.45359237;
   /* in to m */
   double in2m = 0.0254;
-  return pa * (in2m * in2m) / (lb2kg * constants::G_MSS);
+  return pa * (in2m * in2m) / (lb2kg * constants::G_MPS2);
 }
-float Atm2Pa(float atm) {
+float Atm_to_Pa(float atm) {
   return atm * 101325.0f;
 }
-double Atm2Pa(double atm) {
+double Atm_to_Pa(double atm) {
   return atm * 101325.0;
 }
-float Pa2Atm(float pa) {
+float Pa_to_Atm(float pa) {
   return pa / 101325.0f;
 }
-double Pa2Atm(double pa) {
+double Pa_to_Atm(double pa) {
   return pa / 101325.0;
 }
-float Mbar2Pa(float mbar) {
+float Mbar_to_Pa(float mbar) {
   return mbar * 100.0f;
 }
-double Mbar2Pa(double mbar) {
+double Mbar_to_Pa(double mbar) {
   return mbar * 100.0;
 }
-float Pa2Mbar(float pa) {
+float Pa_to_Mbar(float pa) {
   return pa / 100.0f;
 }
-double Pa2Mbar(double pa) {
+double Pa_to_Mbar(double pa) {
   return pa / 100.0;
 }
-float InHg2Pa(float inhg) {
+float InHg_to_Pa(float inhg) {
   /* mmHg is defined as 133.322387415 Pa */
   static const float inhg2pa = 25.4f * 133.322387415f;
   return inhg * inhg2pa;
 }
-double InHg2Pa(double inhg) {
+double InHg_to_Pa(double inhg) {
   /* mmHg is defined as 133.322387415 Pa */
   static const double inhg2pa = 25.4 * 133.322387415;
   return inhg * inhg2pa;
 }
-float Pa2InHg(float pa) {
+float Pa_to_InHg(float pa) {
   /* mmHg is defined as 133.322387415 Pa */
   static const float inhg2pa = 25.4f * 133.322387415f;
   return pa / inhg2pa;
 }
-double Pa2InHg(double pa) {
+double Pa_to_InHg(double pa) {
   /* mmHg is defined as 133.322387415 Pa */
   static const double inhg2pa = 25.4 * 133.322387415;
   return pa / inhg2pa;
 }
-float C2F(float c) {
+float C_to_F(float c) {
   return c * (9.0f / 5.0f) + 32.0f;
 }
-double C2F(double c) {
+double C_to_F(double c) {
   return c * (9.0 / 5.0) + 32.0;
 }
-float F2C(float f) {
+float F_to_C(float f) {
   return (f - 32.0f) * (5.0f / 9.0f);
 }
-double F2C(double f) {
+double F_to_C(double f) {
   return (f - 32.0) * (5.0 / 9.0);
 }
-float C2K(float c) {
+float C_to_K(float c) {
   return c + 273.15f;
 }
-double C2K(double c) {
+double C_to_K(double c) {
   return c + 273.15;
 }
-float K2C(float k) {
+float K_to_C(float k) {
   return k - 273.15f;
 }
-double K2C(double k) {
+double K_to_C(double k) {
   return k - 273.15;
 }
-float F2R(float f) {
+float F_to_R(float f) {
   return f + 459.67f;
 }
-double F2R(double f) {
+double F_to_R(double f) {
   return f + 459.67;
 }
-float R2F(float r) {
+float R_to_F(float r) {
   return r - 459.67f;
 }
-double R2F(double r) {
+double R_to_F(double r) {
   return r - 459.67;
 }
 
