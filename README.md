@@ -19,7 +19,7 @@ cmake ..
 make
 ```
 
-This will build the library, an example executable called *global_defs_example*, and an executable for testing using the Google Test framework, called *global_defs_test*. The example executable source file is located at *examples/global_defs_example.cc*. This code is built and tested on an AMD64 system running Linux and is likely to build on AMD64 systems running the Windows Subsystem for Linux (WSL). As an alternative, a Docker container has been [built](https://hub.docker.com/r/flybrianfly/gcc-cmake) which extends the gcc container to include CMake support and supports building this library.
+This will build the library, an example executable called *global_defs_example*, and an executable for testing using the Google Test framework, called *global_defs_test*. The example executable source file is located at *examples/global_defs_example.cc*. This code is built and tested on AARCH64 and AMD64 system running Linux and AMD64 systems running the Windows Subsystem for Linux (WSL).
 
 ## Constants
 
@@ -31,7 +31,7 @@ The following constants are defined as both single and double precision floats. 
 
 **PI** pi.
 
-**G_MSS** Gravitional acceleration in units of m/s/s.
+**G_MPS2** Gravitional acceleration in units of m/s/s.
 
 ## Conversions
 
@@ -41,122 +41,122 @@ Conversions are within the namepsace *conversions*.
 ### Functions
 The following functions are available to convert between units. All functions are overloaded between single and double precision floating point - if a single precision float is input, a single precision output is returned. Similarly if a double precision float is input, a double precision output is returned.
 
-**M2Ft(m)** Converts meters to feet.
+**M_to_Ft(m)** Converts meters to feet.
 
 ```C++
-std::cout << conversions::M2Ft(0.3048) << std::endl; // 1.0
+std::cout << conversions::M_to_Ft(0.3048) << std::endl; // 1.0
 ```
 
-**Ft2M(ft)** Converts feet to meters.
+**Ft_to_M(ft)** Converts feet to meters.
 
 ```C++
-std::cout << conversions::Ft2M(1.0) << std::endl; // 0.3048
+std::cout << conversions::Ft_to_M(1.0) << std::endl; // 0.3048
 ```
 
-**Rad2Deg(rad)** Converts radians to degrees.
+**Rad_to_Deg(rad)** Converts radians to degrees.
 
 ```C++
-std::cout << conversions::Rad2Deg(constants::PI) << std::endl; // 180.0
+std::cout << conversions::Rad_to_Deg(constants::PI) << std::endl; // 180.0
 ```
 
-**Deg2Rad(deg)** Converts degrees to radians.
+**Deg_to_Rad(deg)** Converts degrees to radians.
 
 ```C++
-std::cout << conversions::Deg2Rad(180.0) << std::endl; // 3.14
+std::cout << conversions::Deg_to_Rad(180.0) << std::endl; // 3.14
 ```
 
-**G2Mss(g)** Converts acceleration in g's to m/s/s.
+**G_to_Mps2(g)** Converts acceleration in g's to m/s/s.
 
 ```C++
-std::cout << conversions::G2Mss(1.0) << std::endl; // 9.80665
+std::cout << conversions::G_to_Mps2(1.0) << std::endl; // 9.80665
 ```
 
-**Mss2G(mss)** Converts acceleration in m/s/s to g's.
+**Mps2_to_G(mss)** Converts acceleration in m/s/s to g's.
 
 ```C++
-std::cout << conversions::Mss2G(9.80665) << std::endl; // 1.0
+std::cout << conversions::Mps2_to_G(9.80665) << std::endl; // 1.0
 ```
 
-**Psi2Pa(psi)** Converts pressure in PSI to Pascal, Pa.
+**Psi_to_Pa(psi)** Converts pressure in PSI to Pascal, Pa.
 
 ```C++
-std::cout << conversions::Psi2Pa(1.0f) << std::endl; // 6894.757293168361
+std::cout << conversions::Psi_to_Pa(1.0f) << std::endl; // 6894.757293168361
 ```
 
-**Pa2Psi(pa)** Converts pressure in Pascal to PSI.
+**Pa_to_Psi(pa)** Converts pressure in Pascal to PSI.
 
 ```C++
-std::cout << conversions::Pa2Psi(1.0f) << std::endl; // 0.0001450377377302092f
+std::cout << conversions::Pa_to_Psi(1.0f) << std::endl; // 0.0001450377377302092f
 ```
 
-**Atm2Pa(atm)** Converts pressure to Standard Atmospheres to Pascal.
+**Atm_to_Pa(atm)** Converts pressure to Standard Atmospheres to Pascal.
 
 ```C++
-std::cout << conversions::Atm2Pa(1.0f) << std::endl; // 101325.0f
+std::cout << conversions::Atm_to_Pa(1.0f) << std::endl; // 101325.0f
 ```
 
-**Pa2Atm(pa)** Converts pressure in Pascal to Standard Atmospheres.
+**Pa_to_Atm(pa)** Converts pressure in Pascal to Standard Atmospheres.
 
 ```C++
-std::cout << conversions::Pa2Atm(101325.0) << std::endl; // 1.0
+std::cout << conversions::Pa_to_Atm(101325.0) << std::endl; // 1.0
 ```
 
-**Mbar2Pa(mbar)** Converts pressure in millibars to Pascal.
+**Mbar_to_Pa(mbar)** Converts pressure in millibars to Pascal.
 
 ```C++
-std::cout << conversions::Mbar2Pa(1.0) << std::endl; // 100.0
+std::cout << conversions::Mbar_to_Pa(1.0) << std::endl; // 100.0
 ```
 
-**Pa2Mbar(pa)** Converts pressure in Pascal to millibar.
+**Pa_to_Mbar(pa)** Converts pressure in Pascal to millibar.
 
 ```C++
-std::cout << conversions::Pa2Mbar(1.0) << std::endl; // 0.01
+std::cout << conversions::Pa_to_Mbar(1.0) << std::endl; // 0.01
 ```
 
-**InHg2Pa(inhg)** Converts pressure in inches of mercury to Pascal.
+**InHg_to_Pa(inhg)** Converts pressure in inches of mercury to Pascal.
 
 ```C++
-std::cout << conversions::InHg2Pa(1.0f) << std::endl; // 3386.388640341f
+std::cout << conversions::InHg_to_Pa(1.0f) << std::endl; // 3386.388640341f
 ```
 
-**Pa2InHg(pa)** Converts pressure in Pascal to inches of mercury.
+**Pa_to_InHg(pa)** Converts pressure in Pascal to inches of mercury.
 
 ```C++
-std::cout << conversions::Pa2InHg(1.0f) << std::endl; // 0.0002952998330101009f
+std::cout << conversions::Pa_to_InHg(1.0f) << std::endl; // 0.0002952998330101009f
 ```
 
-**C2F(c)** Converts temperature in Celsius to Fahrenheit.
+**C_to_F(c)** Converts temperature in Celsius to Fahrenheit.
 
 ```C++
-std::cout << conversions::C2F(10.0f) << std::endl; // 50.0f
+std::cout << conversions::C_to_F(10.0f) << std::endl; // 50.0f
 ```
 
-**F2C(f)** Converts temperature in Fahrenheit to Celsius.
+**F_to_C(f)** Converts temperature in Fahrenheit to Celsius.
 
 ```C++
-std::cout << conversions::F2C(50.0f) << std::endl; // 10.0f
+std::cout << conversions::F_to_C(50.0f) << std::endl; // 10.0f
 ```
 
-**C2K(c)** Converts temperature in Celsius to Kelvin.
+**C_to_K(c)** Converts temperature in Celsius to Kelvin.
 
 ```C++
-std::cout << conversions::C2K(10.0) << std::endl; // 283.15
+std::cout << conversions::C_to_K(10.0) << std::endl; // 283.15
 ```
 
-**K2C(k)** Converts temperature in Kelvin to Celsius.
+**K_to_C(k)** Converts temperature in Kelvin to Celsius.
 
 ```C++
-std::cout << conversions::K2C(50.0) << std::endl; // -223.15
+std::cout << conversions::K_to_C(50.0) << std::endl; // -223.15
 ```
 
-**F2R(f)** Converts temperature in Fahrenheit to Rankine.
+**F_to_R(f)** Converts temperature in Fahrenheit to Rankine.
 
 ```C++
-std::cout << conversions::F2R(50.0) << std::endl; // 509.67
+std::cout << conversions::F_to_R(50.0) << std::endl; // 509.67
 ```
 
-**R2F(r)** Converts temperature in Rankine to Fahrenheit.
+**R_to_F(r)** Converts temperature in Rankine to Fahrenheit.
 
 ```C++
-std::cout << conversions::R2F(50.0) << std::endl; // -409.67
+std::cout << conversions::R_to_F(50.0) << std::endl; // -409.67
 ```
