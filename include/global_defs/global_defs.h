@@ -81,6 +81,12 @@ double F_to_R(double f);
 /* R to F */
 float R_to_F(float r);
 double R_to_F(double r);
+/* Mps to Kt */
+float Mps_to_Kt(float mps);
+double Mps_to_Kt(double mps);
+/* Kt to Mps */
+float Kt_to_Mps(float kt);
+double Kt_to_Mps(double kt);
 }  // namespace conversions
 
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_

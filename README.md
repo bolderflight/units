@@ -149,14 +149,16 @@ std::cout << conversions::C_to_K(10.0) << std::endl; // 283.15
 std::cout << conversions::K_to_C(50.0) << std::endl; // -223.15
 ```
 
-**F_to_R(f)** Converts temperature in Fahrenheit to Rankine.
+**Mps_to_Kt(mps)** Converts speed in m/s to knots.
 
 ```C++
-std::cout << conversions::F_to_R(50.0) << std::endl; // 509.67
+std::cout << conversions::Mps_to_Kt(30.0) << std::endl; // 58.3153
 ```
 
-**R_to_F(r)** Converts temperature in Rankine to Fahrenheit.
+**Kt_to_Mps(kt)** Converts speed in knots to m/s.
 
 ```C++
-std::cout << conversions::R_to_F(50.0) << std::endl; // -409.67
+std::cout << conversions::Kt_to_Mps(120.0) << std::endl; // 61.7333
 ```
+
+

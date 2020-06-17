@@ -153,5 +153,21 @@ float R_to_F(float r) {
 double R_to_F(double r) {
   return r - 459.67;
 }
+float Mps_to_Kt(float mps) {
+  /* 1852m in a nm */
+  return mps * 3600.0f / 1852.0f;
+}
+double Mps_to_Kt(double mps) {
+  /* 1852m in a nm */
+  return mps * 3600.0 / 1852.0;
+}
+float Kt_to_Mps(float kt) {
+  /* 1852m in a nm */
+  return kt * 1852.0f / 3600.0f;
+}
+double Kt_to_Mps(double kt) {
+  /* 1852m in a nm */
+  return kt * 1852.0 / 3600.0;
+}
 
 }  // namespace conversions

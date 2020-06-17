@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.1.0
+- Added knots to m/s and m/s to knots conversion
+
 ## v2.0.0
 - Modified m/s/s to MPS2 instead of MSS to get consistancy in naming scheme
 - Changed from using 2 to "to" to avoid confusion
