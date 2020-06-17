@@ -29,4 +29,6 @@ int main() {
   std::cout << conversions::K_to_C(50.0) << std::endl; // -223.15
   std::cout << conversions::F_to_R(50.0) << std::endl; // 509.67
   std::cout << conversions::R_to_F(50.0) << std::endl; // -409.67
+  std::cout << conversions::Mps_to_Kt(30.0) << std::endl; // 58.3153
+  std::cout << conversions::Kt_to_Mps(120.0) << std::endl; // 61.7333
 }

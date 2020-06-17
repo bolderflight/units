@@ -109,3 +109,13 @@ TEST(R_to_F, R_to_F) {
   EXPECT_FLOAT_EQ(-409.67f, conversions::R_to_F(50.0f));
   EXPECT_DOUBLE_EQ(-409.67, conversions::R_to_F(50.0));
 }
+/* Mps to Kt */
+TEST(Mps_to_Kt, Mps_to_Kt) {
+  EXPECT_FLOAT_EQ(58.31533477321814f, conversions::Mps_to_Kt(30.0f));
+  EXPECT_DOUBLE_EQ(58.31533477321814, conversions::Mps_to_Kt(30.0));
+}
+/* Kt to Mps */
+TEST(Kt_to_Mps, Kt_to_Mps) {
+  EXPECT_FLOAT_EQ(61.73333333333333f, conversions::Kt_to_Mps(120.0f));
+  EXPECT_DOUBLE_EQ(61.73333333333333, conversions::Kt_to_Mps(120.0));
+}
