@@ -169,5 +169,17 @@ double Kt_to_Mps(double kt) {
   /* 1852m in a nm */
   return kt * 1852.0 / 3600.0;
 }
+float Kg_to_Slug(float kg) {
+  return kg / 14.59390;
+}
+double Kg_to_Slug(double kg) {
+  return kg / 14.59390;
+}
+float Slug_to_Kg(float slug) {
+  return slug * 14.59390;
+}
+double Slug_to_Kg(double slug) {
+  return slug * 14.59390;
+}
 
 }  // namespace conversions

@@ -6,8 +6,8 @@
 */
 
 #include "global_defs/global_defs.h"
-#include "gtest/gtest.h"
 #include <math.h>
+#include "gtest/gtest.h"
 
 /* M_to_Ft */
 TEST(M_to_Ft, M_to_Ft) {
@@ -118,4 +118,14 @@ TEST(Mps_to_Kt, Mps_to_Kt) {
 TEST(Kt_to_Mps, Kt_to_Mps) {
   EXPECT_FLOAT_EQ(61.73333333333333f, conversions::Kt_to_Mps(120.0f));
   EXPECT_DOUBLE_EQ(61.73333333333333, conversions::Kt_to_Mps(120.0));
+}
+/* Kg to Slug */
+TEST(Kg_to_Slug, Kg_to_Slug) {
+  EXPECT_FLOAT_EQ(8.2226135577193205f, conversions::Kg_to_Slug(120.0f));
+  EXPECT_DOUBLE_EQ(8.2226135577193205, conversions::Kg_to_Slug(120.0));
+}
+/* Slug to Kg */
+TEST(Slug_to_Kg, Slug_to_Kg) {
+  EXPECT_FLOAT_EQ(1751.268f, conversions::Slug_to_Kg(120.0f));
+  EXPECT_DOUBLE_EQ(1751.268, conversions::Slug_to_Kg(120.0));
 }

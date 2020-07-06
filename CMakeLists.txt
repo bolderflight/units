@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(GlobalDefs
-  VERSION 2.1
+  VERSION 2.2
   DESCRIPTION "Global definitions, constants, and unit conversions."
   LANGUAGES CXX
 )
