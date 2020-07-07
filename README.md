@@ -161,4 +161,15 @@ std::cout << conversions::Mps_to_Kt(30.0) << std::endl; // 58.3153
 std::cout << conversions::Kt_to_Mps(120.0) << std::endl; // 61.7333
 ```
 
+**Kg_to_Slug(kg)** Converts mass in kilograms to slugs.
+
+```C++
+std::cout << conversions::Kg_to_Slug(120.0) << std::endl;  // 8.22261
+```
+
+**Slug_to_Kg(slug)** Converts mass in slugs to kilograms.
+
+```C++
+std::cout << conversions::Slug_to_Kg(120.0) << std::endl;  // 1751.27
+```
 

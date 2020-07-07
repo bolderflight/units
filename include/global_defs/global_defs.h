@@ -87,6 +87,12 @@ double Mps_to_Kt(double mps);
 /* Kt to Mps */
 float Kt_to_Mps(float kt);
 double Kt_to_Mps(double kt);
+/* Kg to Slug */
+float Kg_to_Slug(float kg);
+double Kg_to_Slug(double kg);
+/* Slug to Kg */
+float Slug_to_Kg(float slug);
+double Slug_to_Kg(double slug);
 }  // namespace conversions
 
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_

@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.2.0
+- Added kg to slug and slug to kg conversion
+
 ## v2.1.0
 - Added knots to m/s and m/s to knots conversion
 
