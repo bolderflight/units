@@ -170,13 +170,13 @@ double Kt_to_Mps(double kt) {
   return kt * 1852.0 / 3600.0;
 }
 float Kg_to_Slug(float kg) {
-  return kg / 14.59390;
+  return kg / 14.59390f;
 }
 double Kg_to_Slug(double kg) {
   return kg / 14.59390;
 }
 float Slug_to_Kg(float slug) {
-  return slug * 14.59390;
+  return slug * 14.59390f;
 }
 double Slug_to_Kg(double slug) {
   return slug * 14.59390;
