@@ -13,86 +13,112 @@
 
 /* Constants */
 namespace constants {
-static constexpr float G_MPS2f = 9.80665f;
-static constexpr double G_MPS2 = 9.80665;
-static constexpr float PIf = 3.14159265358979323846f;
-static constexpr double PI = 3.14159265358979323846;
+template<typename T>
+static constexpr T G_MPS2 = 9.80665;
+template<typename T>
+static constexpr T PI = 3.14159265358979323846;
 }  // namespace constants
 
 /* Conversions */
 namespace conversions {
 /* m to ft */
-float M_to_Ft(float m);
-double M_to_Ft(double m);
+template<typename T>
+T M_to_Ft(T m) {return m / static_cast<T>(0.3048);}
 /* ft to m */
-float Ft_to_M(float ft);
-double Ft_to_M(double ft);
+template<typename T>
+T Ft_to_M(T ft) {return ft * static_cast<T>(0.3048);}
 /* Deg to Rad */
-float Deg_to_Rad(float deg);
-double Deg_to_Rad(double deg);
+template<typename T>
+T Deg_to_Rad(T deg) {return deg * constants::PI<T> / static_cast<T>(180);}
 /* Rad to Deg */
-float Rad_to_Deg(float rad);
-double Rad_to_Deg(double rad);
+template<typename T>
+T Rad_to_Deg(T rad) {return rad * static_cast<T>(180) / constants::PI<T>;}
 /* G to m/s/s */
-float G_to_Mps2(float g);
-double G_to_Mps2(double g);
+template<typename T>
+T G_to_Mps2(T g) {return constants::G_MPS2<T> * g;}
 /* m/s/s to G */
-float Mps2_to_G(float mps2);
-double Mps2_to_G(double mps2);
+template<typename T>
+T Mps2_to_G(T mps2) {return mps2 / constants::G_MPS2<T>;}
 /* PSI to Pa */
-float Psi_to_Pa(float psi);
-double Psi_to_Pa(double psi);
+template<typename T>
+T Psi_to_Pa(T psi) {
+  /* lb to kg*/
+  T lb2kg = static_cast<T>(0.45359237);
+  /* in to m */
+  T in2m = static_cast<T>(0.0254);
+  return psi * (lb2kg * constants::G_MPS2<T>) / (in2m * in2m);
+}
 /* Pa to PSI */
-float Pa_to_Psi(float pa);
-double Pa_to_Psi(double pa);
+template<typename T>
+T Pa_to_Psi(T pa) {
+  /* lb to kg*/
+  T lb2kg = static_cast<T>(0.45359237);
+  /* in to m */
+  T in2m = static_cast<T>(0.0254);
+  return pa * (in2m * in2m) / (lb2kg * constants::G_MPS2<T>);
+}
 /* atm to Pa */
-float Atm_to_Pa(float atm);
-double Atm_to_Pa(double atm);
+template<typename T>
+T Atm_to_Pa(T atm) {return atm * static_cast<T>(101325.0);}
 /* Pa to atm */
-float Pa_to_Atm(float pa);
-double Pa_to_Atm(double pa);
+template<typename T>
+T Pa_to_Atm(T pa) {return pa / static_cast<T>(101325.0);}
 /* mbar to Pa */
-float Mbar_to_Pa(float mbar);
-double Mbar_to_Pa(double mbar);
+template<typename T>
+T Mbar_to_Pa(T mbar) {return mbar * static_cast<T>(100.0);}
 /* Pa to mbar */
-float Pa_to_Mbar(float pa);
-double Pa_to_Mbar(double pa);
+template<typename T>
+T Pa_to_Mbar(T pa) {return pa / static_cast<T>(100.0);}
 /* inHg to Pa */
-float InHg_to_Pa(float inhg);
-double InHg_to_Pa(double inhg);
+template<typename T>
+T InHg_to_Pa(T inhg) {
+  /* mmHg is defined as 133.322387415 Pa */
+  static constexpr T inhg2pa = static_cast<T>(25.4) * static_cast<T>(133.322387415);
+  return inhg * inhg2pa;
+}
 /* Pa to inHg */
-float Pa_to_InHg(float pa);
-double Pa_to_InHg(double pa);
+template<typename T>
+T Pa_to_InHg(T pa) {
+  /* mmHg is defined as 133.322387415 Pa */
+  static constexpr T inhg2pa = static_cast<T>(25.4) * static_cast<T>(133.322387415);
+  return pa / inhg2pa;
+}
 /* C to F */
-float C_to_F(float c);
-double C_to_F(double c);
+template<typename T>
+T C_to_F(T c) {return c * static_cast<T>(9) / static_cast<T>(5) + static_cast<T>(32);}
 /* F to C */
-float F_to_C(float f);
-double F_to_C(double f);
+template<typename T>
+T F_to_C(T f) {return (f - static_cast<T>(32)) * static_cast<T>(5) / static_cast<T>(9);}
 /* C to K */
-float C_to_K(float c);
-double C_to_K(double c);
+template<typename T>
+T C_to_K(T c) {return c + static_cast<T>(273.15);}
 /* K to C */
-float K_to_C(float k);
-double K_to_C(double k);
+template<typename T>
+T K_to_C(T k) {return k - static_cast<T>(273.15);}
 /* F to R */
-float F_to_R(float f);
-double F_to_R(double f);
+template<typename T>
+T F_to_R(T f) {return f + static_cast<T>(459.67);}
 /* R to F */
-float R_to_F(float r);
-double R_to_F(double r);
+template<typename T>
+T R_to_F(T r) {return r - static_cast<T>(459.67);}
 /* Mps to Kt */
-float Mps_to_Kt(float mps);
-double Mps_to_Kt(double mps);
+template<typename T>
+T Mps_to_Kt(T mps) {
+  /* 1852m in a nm */
+  return mps * static_cast<T>(3600) / static_cast<T>(1852);
+}
 /* Kt to Mps */
-float Kt_to_Mps(float kt);
-double Kt_to_Mps(double kt);
+template<typename T>
+T Kt_to_Mps(T kt) {
+  /* 1852m in a nm */
+  return kt * static_cast<T>(1852) / static_cast<T>(3600);
+}
 /* Kg to Slug */
-float Kg_to_Slug(float kg);
-double Kg_to_Slug(double kg);
+template<typename T>
+T Kg_to_Slug(T kg) {return kg / static_cast<T>(14.59390);}
 /* Slug to Kg */
-float Slug_to_Kg(float slug);
-double Slug_to_Kg(double slug);
+template<typename T>
+T Slug_to_Kg(T slug) {return slug * static_cast<T>(14.59390);}
 }  // namespace conversions
 
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_

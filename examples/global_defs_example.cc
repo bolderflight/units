@@ -11,7 +11,7 @@
 int main() {
   std::cout << conversions::M_to_Ft(0.3048) << std::endl;  // 1.0
   std::cout << conversions::Ft_to_M(1.0) << std::endl;  // 0.3048
-  std::cout << conversions::Rad_to_Deg(constants::PI) << std::endl;  // 180.0
+  std::cout << conversions::Rad_to_Deg(constants::PI<float>) << std::endl;  // 180.0
   std::cout << conversions::Deg_to_Rad(180.0) << std::endl;  // 3.14
   std::cout << conversions::G_to_Mps2(1.0) << std::endl;  // 9.80665
   std::cout << conversions::Mps2_to_G(9.80665) << std::endl;  // 1.0

@@ -21,23 +21,23 @@ TEST(Ft_to_M, Ft_to_M) {
 }
 /* Deg_to_Rad */
 TEST(Deg_to_Rad, Deg_to_Rad) {
-  EXPECT_FLOAT_EQ(constants::PIf, conversions::Deg_to_Rad(180.0f));
-  EXPECT_DOUBLE_EQ(constants::PI, conversions::Deg_to_Rad(180.0));
+  EXPECT_FLOAT_EQ(constants::PI<float>, conversions::Deg_to_Rad(180.0f));
+  EXPECT_DOUBLE_EQ(constants::PI<double>, conversions::Deg_to_Rad(180.0));
 }
 /* Rad_to_Deg */
 TEST(Rad_to_Deg, Rad_to_Deg) {
-  EXPECT_FLOAT_EQ(180.0f, conversions::Rad_to_Deg(constants::PIf));
-  EXPECT_DOUBLE_EQ(180.0, conversions::Rad_to_Deg(constants::PI));
+  EXPECT_FLOAT_EQ(180.0f, conversions::Rad_to_Deg(constants::PI<float>));
+  EXPECT_DOUBLE_EQ(180.0, conversions::Rad_to_Deg(constants::PI<double>));
 }
 /* G_to_Mps2 */
 TEST(G_to_Mps2, G_to_Mps2) {
-  EXPECT_FLOAT_EQ(constants::G_MPS2f, conversions::G_to_Mps2(1.0f));
-  EXPECT_DOUBLE_EQ(constants::G_MPS2, conversions::G_to_Mps2(1.0));
+  EXPECT_FLOAT_EQ(constants::G_MPS2<float>, conversions::G_to_Mps2(1.0f));
+  EXPECT_DOUBLE_EQ(constants::G_MPS2<double>, conversions::G_to_Mps2(1.0));
 }
 /* Mps2_to_G */
 TEST(Mps2_to_G, Mps2_to_G) {
-  EXPECT_FLOAT_EQ(1.0f, conversions::Mps2_to_G(constants::G_MPS2f));
-  EXPECT_DOUBLE_EQ(1.0, conversions::Mps2_to_G(constants::G_MPS2));
+  EXPECT_FLOAT_EQ(1.0f, conversions::Mps2_to_G(constants::G_MPS2<float>));
+  EXPECT_DOUBLE_EQ(1.0, conversions::Mps2_to_G(constants::G_MPS2<double>));
 }
 /* PSI to Pa */
 TEST(Psi_to_Pa, Psi_to_Pa) {

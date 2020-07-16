@@ -27,11 +27,19 @@ This will build the library, an example executable called *global_defs_example*,
 Constants are within the namespace *constants*.
 
 ### Values
-The following constants are defined as both single and double precision floats. An appended lower case *f* is used to specify a single precision float. For example *PI* defines pi as a double precision float whereas *PIf* is pi as a single precision float.
+The following constants are templated, use a template parameter to specify the native type to return the constant in.
 
 **PI** pi.
 
+```C++
+double my_pi = constants::PI<double>;
+```
+
 **G_MPS2** Gravitional acceleration in units of m/s/s.
+
+```C++
+int my_grav = constants::G_MPS2<int>;
+```
 
 ## Conversions
 
@@ -39,7 +47,7 @@ The following constants are defined as both single and double precision floats. 
 Conversions are within the namepsace *conversions*.
 
 ### Functions
-The following functions are available to convert between units. All functions are overloaded between single and double precision floating point - if a single precision float is input, a single precision output is returned. Similarly if a double precision float is input, a double precision output is returned.
+The following functions are available to convert between units. All functions are templated based off the input type - for example, if a single precision float is input, a single precision output is returned. Similarly if an int is input, an int is returned.
 
 **M_to_Ft(m)** Converts meters to feet.
 
@@ -56,7 +64,7 @@ std::cout << conversions::Ft_to_M(1.0) << std::endl; // 0.3048
 **Rad_to_Deg(rad)** Converts radians to degrees.
 
 ```C++
-std::cout << conversions::Rad_to_Deg(constants::PI) << std::endl; // 180.0
+std::cout << conversions::Rad_to_Deg(constants::PI<double>) << std::endl; // 180.0
 ```
 
 **Deg_to_Rad(deg)** Converts degrees to radians.
@@ -172,4 +180,3 @@ std::cout << conversions::Kg_to_Slug(120.0) << std::endl;  // 8.22261
 ```C++
 std::cout << conversions::Slug_to_Kg(120.0) << std::endl;  // 1751.27
 ```
-
