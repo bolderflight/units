@@ -13,7 +13,7 @@
 
 /* Constants */
 namespace constants {
-template<typename T>  
+template<typename T>
 static constexpr T G_MPS2 = 9.80665;
 template<typename T>
 static constexpr T PI = 3.14159265358979323846;
