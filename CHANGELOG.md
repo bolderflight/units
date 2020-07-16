@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.1
+- Added a static assert to ensure only floating point types are used
+
+## v3.0.0
+- Templated the constants and conversions
+
 ## v2.2.0
 - Added kg to slug and slug to kg conversion
 
