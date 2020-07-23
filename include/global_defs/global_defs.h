@@ -12,6 +12,7 @@
 #include <type_traits>
 
 /* Constants */
+namespace global {
 namespace constants {
 template<typename T>
 static constexpr T G_MPS2 = static_cast<T>(9.80665);
@@ -126,5 +127,5 @@ T Kg_to_Slug(T kg) {static_assert(std::is_floating_point<T>::value, "Only floati
 template<typename T>
 T Slug_to_Kg(T slug) {static_assert(std::is_floating_point<T>::value, "Only floating point types supported"); return slug * static_cast<T>(14.59390);}
 }  // namespace conversions
-
+}  // namespace global
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
