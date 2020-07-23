@@ -21,6 +21,9 @@ make
 
 This will build the library, an example executable called *global_defs_example*, and an executable for testing using the Google Test framework, called *global_defs_test*. The example executable source file is located at *examples/global_defs_example.cc*. This code is built and tested on AARCH64 and AMD64 system running Linux and AMD64 systems running the Windows Subsystem for Linux (WSL).
 
+## Namespace
+Constants and Conversions are within the namespace *global*.
+
 ## Constants
 
 ### Namespace

@@ -9,6 +9,8 @@
 #include <math.h>
 #include "gtest/gtest.h"
 
+using namespace global;
+
 /* M_to_Ft */
 TEST(M_to_Ft, M_to_Ft) {
   EXPECT_FLOAT_EQ(1.0f, conversions::M_to_Ft(0.3048f));
