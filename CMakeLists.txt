@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(GlobalDefs
-  VERSION 3.0.2
+  VERSION 1.0.0
   DESCRIPTION "Global definitions, constants, and unit conversions."
   LANGUAGES CXX
 )
@@ -9,6 +9,7 @@ project(GlobalDefs
 add_library(global_defs INTERFACE)
 # Setup include directories 
 target_include_directories(global_defs INTERFACE include/)
+
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# Add the example target
