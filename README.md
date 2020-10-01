@@ -183,3 +183,15 @@ std::cout << global::conversions::Kg_to_Slug(120.0) << std::endl;  // 8.22261
 ```C++
 std::cout << global::conversions::Slug_to_Kg(120.0) << std::endl;  // 1751.27
 ```
+
+**Gauss_to_uT(gauss)** Converts magnetic flux density in Gauss to micro Tesla.
+
+```C++
+std::cout << global::conversions::Gauss_to_uT(1.0) << std::endl;  // 100
+```
+
+**uT_to_Gauss(ut)** Converts magnetic flux density in micro Tesla to Gauss.
+
+```C++
+std::cout << global::conversions::uT_to_Gauss(100.0) << std::endl;  // 1
+```

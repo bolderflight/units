@@ -131,3 +131,13 @@ TEST(Slug_to_Kg, Slug_to_Kg) {
   EXPECT_FLOAT_EQ(1751.268f, conversions::Slug_to_Kg(120.0f));
   EXPECT_DOUBLE_EQ(1751.268, conversions::Slug_to_Kg(120.0));
 }
+/* Gauss to uT */
+TEST(Gauss_to_uT, Gauss_to_uT) {
+  EXPECT_FLOAT_EQ(100.0f, conversions::Gauss_to_uT(1.0f));
+  EXPECT_DOUBLE_EQ(100.0, conversions::Gauss_to_uT(1.0));
+}
+/* uT to Gauss */
+TEST(uT_to_Gauss, uT_to_Gauss) {
+  EXPECT_FLOAT_EQ(1.0f, conversions::uT_to_Gauss(100.0f));
+  EXPECT_DOUBLE_EQ(1.0, conversions::uT_to_Gauss(100.0));
+}

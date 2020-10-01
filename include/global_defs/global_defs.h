@@ -126,6 +126,21 @@ T Kg_to_Slug(T kg) {static_assert(std::is_floating_point<T>::value, "Only floati
 /* Slug to Kg */
 template<typename T>
 T Slug_to_Kg(T slug) {static_assert(std::is_floating_point<T>::value, "Only floating point types supported"); return slug * static_cast<T>(14.59390);}
+/* Gauss to uT */
+template<typename T>
+T Gauss_to_uT(T g) {
+  static_assert(std::is_floating_point<T>::value, "Only floating point types supported");
+  /* 1 Gauss is 100 uT */
+  return g * static_cast<T>(100);
+}
+/* uT to Gauss */
+template<typename T>
+T uT_to_Gauss(T ut) {
+  static_assert(std::is_floating_point<T>::value, "Only floating point types supported");
+  /* 1 Gauss is 100 uT */
+  return ut / static_cast<T>(100);
+}
+
 }  // namespace conversions
 }  // namespace global
 #endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
