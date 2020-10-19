@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1.2
+- Updated contributing
+
 ## v1.1.1
 - Updated license to MIT
 
