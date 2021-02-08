@@ -2,14 +2,12 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) _to_0_to_0 Bolder Flight Systems
+* Copyright (c) 2021 Bolder Flight Systems
 */
 
-#include "global_defs/global_defs.h"
+#include "units/units.h"
 #include <math.h>
 #include "gtest/gtest.h"
-
-using namespace global;
 
 /* M_to_Ft */
 TEST(M_to_Ft, M_to_Ft) {
