@@ -8,7 +8,7 @@ Lint:
   tags:
     - bfs
   script: 
-    - cpplint.py --verbose=0 --filter=-whitespace,-line_length include/global_defs/global_defs.h
+    - cpplint.py --verbose=0 include/units/units.h
 
 Compile:
   stage: build
@@ -21,11 +21,11 @@ Compile:
     - make
   artifacts:
     paths:
-      - build/global_defs_test
+      - build/units_test
   
 Test Global Defs:
   stage: test
   tags:
     - bfs
   script:
-    - ./build/global_defs_test
+    - ./build/units_test

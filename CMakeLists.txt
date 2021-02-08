@@ -1,28 +1,28 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
-project(GlobalDefs
-  VERSION 1.1.2
-  DESCRIPTION "Global definitions, constants, and unit conversions."
+project(Units
+  VERSION 2.0.0
+  DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )
 # Add the library target
-add_library(global_defs INTERFACE)
+add_library(units INTERFACE)
 # Setup include directories 
-target_include_directories(global_defs INTERFACE include/)
+target_include_directories(units INTERFACE include/)
 
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# Add the example target
-	add_executable(global_defs_example examples/global_defs_example.cc)
+	add_executable(units_example examples/units_example.cc)
 	# Add the includes
-	target_include_directories(global_defs_example PUBLIC 
+	target_include_directories(units_example PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<INSTALL_INTERFACE:include>
 	)
 	# Link libraries to the test target
-	target_link_libraries(global_defs_example
-		PRIVATE 
-			global_defs
+	target_link_libraries(units_example
+		PRIVATE
+			units
 	)
 	# Fetch google test
 	include(FetchContent)
@@ -35,20 +35,20 @@ if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	enable_testing()
 	include(GoogleTest)
 	# Add the test target
-	add_executable(global_defs_test tests/global_defs_test.cc)
+	add_executable(units_test tests/units_test.cc)
 	# Add the includes
-	target_include_directories(global_defs_test PUBLIC 
+	target_include_directories(units_test PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<INSTALL_INTERFACE:include>
 	)
 	# Link libraries to the test target
-	target_link_libraries(global_defs_test
+	target_link_libraries(units_test
 		PRIVATE 
-			global_defs
+			units
 			gtest_main 
 			gtest
 			gmock
 	)
 	# Discover unit tests
-	gtest_discover_tests(global_defs_test)
+	gtest_discover_tests(units_test)
 endif()

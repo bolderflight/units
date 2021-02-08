@@ -5,14 +5,13 @@
 * Copyright (c) 2020 Bolder Flight Systems
 */
 
-#ifndef INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
-#define INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
+#ifndef INCLUDE_UNITS_UNITS_H_
+#define INCLUDE_UNITS_UNITS_H_
 
 #include <cstdint>
 #include <type_traits>
 
 /* Constants */
-namespace global {
 namespace constants {
 template<typename T>
 static constexpr T G_MPS2 = static_cast<T>(9.80665);
@@ -142,5 +141,5 @@ T uT_to_Gauss(T ut) {
 }
 
 }  // namespace conversions
-}  // namespace global
-#endif  // INCLUDE_GLOBAL_DEFS_GLOBAL_DEFS_H_
+
+#endif  // INCLUDE_UNITS_UNITS_H_
