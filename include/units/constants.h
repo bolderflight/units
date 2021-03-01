@@ -23,20 +23,22 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_UNITS_H_
-#define INCLUDE_UNITS_UNITS_H_
+#ifndef INCLUDE_UNITS_CONSTANTS_H_
+#define INCLUDE_UNITS_CONSTANTS_H_
 
-#include "units/constants.h"
-#include "units/convlength.h"
-#include "units/convvel.h"
-#include "units/convacc.h"
-#include "units/convang.h"
-#include "units/convangvel.h"
-#include "units/convangacc.h"
-#include "units/convforce.h"
-#include "units/convmass.h"
-#include "units/convdensity.h"
-#include "units/convpres.h"
-#include "units/convtemp.h"
+namespace bfs {
+/*
+* PI and 2*PI constants. Normally M_PI would be used, but this is not
+* available on all targets (i.e. Cortex M). Arduino defined PI for use in
+* their ecosystem. We're using BFS_PI and BFS_2PI to avoid naming conflicts
+* and provide a consistent source for PI across targets.
+*/
+template<typename T>
+static constexpr T BFS_PI = static_cast<T>(3.14159265358979323846);
+template<typename T>
+static constexpr T BFS_2PI = static_cast<T>(2) *
+                             static_cast<T>(3.14159265358979323846);
 
-#endif  // INCLUDE_UNITS_UNITS_H_
+}  // namespace bfs
+
+#endif  // INCLUDE_UNITS_CONSTANTS_H_

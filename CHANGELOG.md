@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.0.0
+- Switched to namespace bfs
+- Switched to MATLAB equivalent conversion functions: convlength, convvel, convacc, convang, convangvel, convangacc, convforce, convmass, convdensity, convpres, convtemp
+- Added rad2deg and deg2rad
+
 ## v2.0.0
 - renamed from global_defs to units, which more appropriately describes the library function
 - updated contributing

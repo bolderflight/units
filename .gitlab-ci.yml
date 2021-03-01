@@ -9,6 +9,18 @@ Lint:
     - bfs
   script: 
     - cpplint.py --verbose=0 include/units/units.h
+    - cpplint.py --verbose=0 include/units/constants.h
+    - cpplint.py --verbose=0 include/units/convacc.h
+    - cpplint.py --verbose=0 include/units/convang.h
+    - cpplint.py --verbose=0 include/units/convangacc.h
+    - cpplint.py --verbose=0 include/units/convangvel.h
+    - cpplint.py --verbose=0 include/units/convdensity.h
+    - cpplint.py --verbose=0 include/units/convforce.h
+    - cpplint.py --verbose=0 include/units/convlength.h
+    - cpplint.py --verbose=0 include/units/convmass.h
+    - cpplint.py --verbose=0 include/units/convpres.h
+    - cpplint.py --verbose=0 include/units/convtemp.h
+    - cpplint.py --verbose=0 include/units/convvel.h
 
 Compile:
   stage: build
@@ -23,7 +35,7 @@ Compile:
     paths:
       - build/units_test
   
-Test Global Defs:
+Test Units:
   stage: test
   tags:
     - bfs
