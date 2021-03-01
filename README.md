@@ -20,174 +20,186 @@ make
 
 This will build the library, an example executable called *units_example*, and an executable for testing using the Google Test framework, called *units_test*. The example executable source file is located at *examples/units_example.cc*.
 
+# Namespace
+This library is within the namespace *bfs*.
+
 ## Constants
-
-### Namespace
-Constants are within the namespace *constants*.
-
-### Values
-The following constants are templated, use a template parameter to specify the native type to return the constant in.
-
-**PI** pi.
+pi and 2pi are defined as constants *BFS_PI* and *BFS_2PI* to avoid name conflicts with other potential definitions. These provide a consistent source for pi and 2pi across targets. Both are templated with a template parameter specifying the native type.
 
 ```C++
-double my_pi = constants::PI<double>;
-```
-
-**G_MPS2** Gravitional acceleration in units of m/s/s.
-
-```C++
-int my_grav = constants::G_MPS2<int>;
+double my_pi = bfs::BFS_PI<double>;
+float my_2pi = bfs::BFS_2PI<float>;
 ```
 
 ## Conversions
 
-### Namespace
-Conversions are within the namepsace *conversions*.
+**T convlength(T val, LinPosUnit input, LinPosUnit output)** converts *val* between *input* and *output* linear position units. This function is equivalent to the [MATLAB convlength](https://www.mathworks.com/help/aerotbx/ug/convlength.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
 
-### Functions
-The following functions are available to convert between units. All functions are templated based off the input type - for example, if a single precision float is input, a single precision output is returned. Similarly if an int is input, an int is returned.
-
-**M_to_Ft(m)** Converts meters to feet.
+| Enum      | Unit            |
+| ---       | ---             |
+| FT        | feet            |
+| M         | meters          |
+| KM        | kilometers      |
+| IN        | inches          |
+| MI        | miles           |
+| NAUT_MI   | nautical miles  |
 
 ```C++
-std::cout << conversions::M_to_Ft(0.3048) << std::endl; // 1.0
+/* Convert 10 feet to meters */
+float dist_m = bfs::convlength(10.0f, bfs::LinPosUnit::FT, bfs::LinPosUnit::M);
 ```
 
-**Ft_to_M(ft)** Converts feet to meters.
+**T convvel(T val, LinVelUnit input, LinVelUnit output)** converts *val* between *input* and *output* linear velocity units. This function is equivalent to the [MATLAB convvel](https://www.mathworks.com/help/aerotbx/ug/convvel.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum   | Unit                         |
+| ---    | ---                          |
+| FPS    | feet per second, ft/s        |
+| MPS    | meters per second, m/s       |
+| KPS    | kilometers per second, km/s  |
+| IPS    | inches per second, in/s      |
+| KPH    | kilometers per hour, km/h    |
+| MPH    | miles per hour, mi/h         |
+| KTS    | knots                        |
+| FPM    | feet per minute, ft/min      |
 
 ```C++
-std::cout << conversions::Ft_to_M(1.0) << std::endl; // 0.3048
+/* Convert 10 ft/s to m/s */
+float vel_mps = bfs::convvel(10.0f, bfs::LinVelUnit::FPS, bfs::LinVelUnit::MPS);
 ```
 
-**Rad_to_Deg(rad)** Converts radians to degrees.
+**T convacc(T val, LinAccUnit input, LinAccUnit output)** converts *val* between *input* and *output* linear acceleration units. This function is equivalent to the [MATLAB convacc](https://www.mathworks.com/help/aerotbx/ug/convacc.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum   | Unit                                      |
+| ---    | ---                                       |
+| FPS2   | feet per second per second, ft/s/s        |
+| MPS2   | meters per second per second, m/s/s       |
+| KPS2   | kilometers per second per second, km/s/s  |
+| IPS2   | inches per second per second, in/s/s      |
+| KPHPS  | kilometers per hour per second, km/h/s    |
+| MPHPS  | miles per hour per second, mi/h/s         |
+| G      | G force acceleration, G                   |
 
 ```C++
-std::cout << conversions::Rad_to_Deg(constants::PI<double>) << std::endl; // 180.0
+/* Convert 1 G to m/s/s */
+float acc_mps2 = bfs::convacc(1.0f, bfs::LinAccUnit::G, bfs::LinAccUnit::MPS2);
 ```
 
-**Deg_to_Rad(deg)** Converts degrees to radians.
+**T convang(T val, AngPosUnit input, AngPosUnit output)** converts *val* between *input* and *output* angle units. This function is equivalent to the [MATLAB convang](https://www.mathworks.com/help/aerotbx/ug/convang.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum  | Unit         |
+| ---   | ---          |
+| DEG   | degrees      |
+| RAD   | radians      |
+| REV   | revolutions  |
 
 ```C++
-std::cout << conversions::Deg_to_Rad(180.0) << std::endl; // 3.14
+/* Convert 1 deg to rad */
+float ang_rad = bfs::convang(1.0f, bfs::AngPosUnit::DEG, bfs::AngPosUnit::RAD);
 ```
 
-**G_to_Mps2(g)** Converts acceleration in g's to m/s/s.
+**T rad2deg(const T val)** converts the input from radians to degrees. This function is equivalent to the [MATLAB rad2deg](https://www.mathworks.com/help/matlab/ref/rad2deg.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported.
 
 ```C++
-std::cout << conversions::G_to_Mps2(1.0) << std::endl; // 9.80665
+/* Convert 1 rad to deg */
+float ang_deg = bfs::rad2deg(1.0f);
 ```
 
-**Mps2_to_G(mss)** Converts acceleration in m/s/s to g's.
+**T deg2rad(const T val)** converts the input from degrees to radians. This function is equivalent to the [MATLAB deg2rad](https://www.mathworks.com/help/matlab/ref/deg2rad.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported.
 
 ```C++
-std::cout << conversions::Mps2_to_G(9.80665) << std::endl; // 1.0
+/* Convert 1 deg to rad */
+float ang_rad = bfs::deg2rad(1.0f);
 ```
 
-**Psi_to_Pa(psi)** Converts pressure in PSI to Pascal, Pa.
+**T convangvel(T val, AngVelUnit input, AngVelUnit output)** converts *val* between *input* and *output* angular velocity units. This function is equivalent to the [MATLAB convangvel](https://www.mathworks.com/help/aerotbx/ug/convangvel.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum   | Unit                        |
+| ---    | ---                         |
+| DEGPS  | degrees per second, deg/s   |
+| RADPS  | radians per second, rad/s   |
+| RPM    | revolutions per minute, rpm |
 
 ```C++
-std::cout << conversions::Psi_to_Pa(1.0f) << std::endl; // 6894.757293168361
+/* Convert 1 deg/s to rad/s */
+float w_radps = bfs::convangvel(1.0f, bfs::AngVelUnit::DEGPS, bfs::AngVelUnit::RADPS);
 ```
 
-**Pa_to_Psi(pa)** Converts pressure in Pascal to PSI.
+**T convangacc(T val, AngAccUnit input, AngAccUnit output)** converts *val* between *input* and *output* angular acceleration units. This function is equivalent to the [MATLAB convangacc](https://www.mathworks.com/help/aerotbx/ug/convangacc.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum    | Unit                                     |
+| ---     | ---                                      |
+| DEGPS2  | degrees per second per second, deg/s/s   |
+| RADPS2  | radians per second per second, rad/s/s   |
+| RPMPS   | revolutions per minute per second, rpm/s |
 
 ```C++
-std::cout << conversions::Pa_to_Psi(1.0f) << std::endl; // 0.0001450377377302092f
+/* Convert 1 deg/s/s to rad/s/s */
+float a_radps2 = bfs::convangacc(1.0f, bfs::AngAccUnit::DEGPS2, bfs::AngAccUnit::RADPS2);
 ```
 
-**Atm_to_Pa(atm)** Converts pressure to Standard Atmospheres to Pascal.
+**T convforce(T val, ForceUnit input, ForceUnit output)** converts *val* between *input* and *output* force units. This function is equivalent to the [MATLAB convforce](https://www.mathworks.com/help/aerotbx/ug/convforce.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum | Unit        |
+| ---  | ---         |
+| LBF  | pound force |
+| N    | Newton      |
 
 ```C++
-std::cout << conversions::Atm_to_Pa(1.0f) << std::endl; // 101325.0f
+/* Convert 1 lbf to N */
+float f_n = bfs::convforce(1.0f, bfs::ForceUnit::LBF, bfs::ForceUnit::N);
 ```
 
-**Pa_to_Atm(pa)** Converts pressure in Pascal to Standard Atmospheres.
+**T convmass(T val, MassUnit input, MassUnit output)** converts *val* between *input* and *output* mass units. This function is equivalent to the [MATLAB convmass](https://www.mathworks.com/help/aerotbx/ug/convmass.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum | Unit        |
+| ---  | ---         |
+| LBM  | pound mass  |
+| KG   | kilograms   |
+| SLUG | slugs       |
 
 ```C++
-std::cout << conversions::Pa_to_Atm(101325.0) << std::endl; // 1.0
+/* Convert 1 kg to slug */
+float m_slug = bfs::convmass(1.0f, bfs::MassUnit::KG, bfs::MassUnit::SLUG);
 ```
 
-**Mbar_to_Pa(mbar)** Converts pressure in millibars to Pascal.
+**T convdensity(T val, DensityUnit input, DensityUnit output)** converts *val* between *input* and *output* density units. This function is equivalent to the [MATLAB convdensity](https://www.mathworks.com/help/aerotbx/ug/convdensity.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum      | Unit                                |
+| ---       | ---                                 |
+| LBMPFT3   | pound mass per feet cubed, lbm/ft^3 |
+| KGPM3     | kilogram per meters cubed, kg/m^3   |
+| SLUGPFT3  | slug per feet cubed, slug/ft^3      |
+| LBMPIN3   | pound mass per inch cubed, lbm/in^3 |
 
 ```C++
-std::cout << conversions::Mbar_to_Pa(1.0) << std::endl; // 100.0
+/* Convert 1 lbm/ft^3 to kg/m^3 */
+float dens_kgpm3 = bfs::convdensity(1.0f, bfs::DensityUnit::LBMPFT3, bfs::DensityUnit::KGPM3);
 ```
 
-**Pa_to_Mbar(pa)** Converts pressure in Pascal to millibar.
+**T convpres(T val, PresUnit input, PresUnit output)** converts *val* between *input* and *output* pressure units. This function is equivalent to the [MATLAB convpres](https://www.mathworks.com/help/aerotbx/ug/convpres.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum  | Unit                        |
+| ---   | ---                         |
+| PSI   | pound force per square inch |
+| PA    | Pascal                      |
+| PSF   | pound force per square foot |
+| ATM   | atmosphere                  |
 
 ```C++
-std::cout << conversions::Pa_to_Mbar(1.0) << std::endl; // 0.01
+/* Convert 1 psi to pa */
+float p_pa = bfs::convpres(1.0f, bfs::PresUnit::PSI, bfs::PresUnit::PA);
 ```
 
-**InHg_to_Pa(inhg)** Converts pressure in inches of mercury to Pascal.
+**T convtemp(T val, TempUnit input, TempUnit output)** converts *val* between *input* and *output* temperature units. This function is equivalent to the [MATLAB convtemp](https://www.mathworks.com/help/aerotbx/ug/convtemp.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
+
+| Enum  | Unit       |
+| ---   | ---        |
+| K     | Kelvin     |
+| F     | Fahrenheit |
+| C     | Celsius    |
+| R     | Rankine    |
 
 ```C++
-std::cout << conversions::InHg_to_Pa(1.0f) << std::endl; // 3386.388640341f
-```
-
-**Pa_to_InHg(pa)** Converts pressure in Pascal to inches of mercury.
-
-```C++
-std::cout << conversions::Pa_to_InHg(1.0f) << std::endl; // 0.0002952998330101009f
-```
-
-**C_to_F(c)** Converts temperature in Celsius to Fahrenheit.
-
-```C++
-std::cout << conversions::C_to_F(10.0f) << std::endl; // 50.0f
-```
-
-**F_to_C(f)** Converts temperature in Fahrenheit to Celsius.
-
-```C++
-std::cout << conversions::F_to_C(50.0f) << std::endl; // 10.0f
-```
-
-**C_to_K(c)** Converts temperature in Celsius to Kelvin.
-
-```C++
-std::cout << conversions::C_to_K(10.0) << std::endl; // 283.15
-```
-
-**K_to_C(k)** Converts temperature in Kelvin to Celsius.
-
-```C++
-std::cout << conversions::K_to_C(50.0) << std::endl; // -223.15
-```
-
-**Mps_to_Kt(mps)** Converts speed in m/s to knots.
-
-```C++
-std::cout << conversions::Mps_to_Kt(30.0) << std::endl; // 58.3153
-```
-
-**Kt_to_Mps(kt)** Converts speed in knots to m/s.
-
-```C++
-std::cout << conversions::Kt_to_Mps(120.0) << std::endl; // 61.7333
-```
-
-**Kg_to_Slug(kg)** Converts mass in kilograms to slugs.
-
-```C++
-std::cout << conversions::Kg_to_Slug(120.0) << std::endl;  // 8.22261
-```
-
-**Slug_to_Kg(slug)** Converts mass in slugs to kilograms.
-
-```C++
-std::cout << conversions::Slug_to_Kg(120.0) << std::endl;  // 1751.27
-```
-
-**Gauss_to_uT(gauss)** Converts magnetic flux density in Gauss to micro Tesla.
-
-```C++
-std::cout << conversions::Gauss_to_uT(1.0) << std::endl;  // 100
-```
-
-**uT_to_Gauss(ut)** Converts magnetic flux density in micro Tesla to Gauss.
-
-```C++
-std::cout << conversions::uT_to_Gauss(100.0) << std::endl;  // 1
+/* Convert 1 C to F */
+float temp_f = bfs::convtemp(1.0f, bfs::TempUnit::C, bfs::TempUnit::F);
 ```
