@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.1.0
+- Added gravitational acceleration constant
+
 ## v3.0.0
 - Switched to namespace bfs
 - Switched to MATLAB equivalent conversion functions: convlength, convvel, convacc, convang, convangvel, convangacc, convforce, convmass, convdensity, convpres, convtemp

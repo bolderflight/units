@@ -31,6 +31,12 @@ double my_pi = bfs::BFS_PI<double>;
 float my_2pi = bfs::BFS_2PI<float>;
 ```
 
+Gravitational acceleration is defined as constant *G_MPS2*. It is templated with a parameter specifying the native type.
+
+```C++
+double g_mps2 = bfs::G_MPS2<double>;
+```
+
 ## Conversions
 
 **T convlength(T val, LinPosUnit input, LinPosUnit output)** converts *val* between *input* and *output* linear position units. This function is equivalent to the [MATLAB convlength](https://www.mathworks.com/help/aerotbx/ug/convlength.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
