@@ -38,7 +38,9 @@ static constexpr T BFS_PI = static_cast<T>(3.14159265358979323846);
 template<typename T>
 static constexpr T BFS_2PI = static_cast<T>(2) *
                              static_cast<T>(3.14159265358979323846);
-
+/* Gravitational Acceleration */
+template<typename T>
+static constexpr T G_MPS2 = static_cast<T>(9.80665);
 }  // namespace bfs
 
 #endif  // INCLUDE_UNITS_CONSTANTS_H_
