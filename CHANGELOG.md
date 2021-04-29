@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.2.0
+- Added atmospheric constants
+
 ## v3.1.0
 - Added gravitational acceleration constant
 
