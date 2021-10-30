@@ -364,6 +364,7 @@ TEST(convdensity, lbmpin3) {
 TEST(convpres, psi) {
   EXPECT_FLOAT_EQ(10.0f, bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::PSI));
   EXPECT_FLOAT_EQ(68947.5729316836f, bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::PA));
+  EXPECT_FLOAT_EQ(689.475729316836f, bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::HPA));
   EXPECT_FLOAT_EQ(1440.0f, bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::PSF));
   EXPECT_FLOAT_EQ(0.680459639098777f, bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::ATM));
 }
@@ -374,10 +375,19 @@ TEST(convpres, pa) {
   EXPECT_FLOAT_EQ(0.208854342331501f, bfs::convpres(10.0f, bfs::PresUnit::PA, bfs::PresUnit::PSF));
   EXPECT_FLOAT_EQ(0.00986923266716013f, bfs::convpres(1000.0f, bfs::PresUnit::PA, bfs::PresUnit::ATM));
 }
+/* hpa */
+TEST(convpres, hpa) {
+  EXPECT_FLOAT_EQ(0.145037737730209f, bfs::convpres(10.0f, bfs::PresUnit::HPA, bfs::PresUnit::PSI));
+  EXPECT_FLOAT_EQ(1000.0f, bfs::convpres(10.0f, bfs::PresUnit::HPA, bfs::PresUnit::PA));
+  EXPECT_FLOAT_EQ(10.0f, bfs::convpres(10.0f, bfs::PresUnit::HPA, bfs::PresUnit::HPA));
+  EXPECT_FLOAT_EQ(20.8854342331501f, bfs::convpres(10.0f, bfs::PresUnit::HPA, bfs::PresUnit::PSF));
+  EXPECT_FLOAT_EQ(0.00986923266716013f, bfs::convpres(10.0f, bfs::PresUnit::HPA, bfs::PresUnit::ATM));
+}
 /* psf */
 TEST(convpres, psf) {
   EXPECT_FLOAT_EQ(0.0694444444444444f, bfs::convpres(10.0f, bfs::PresUnit::PSF, bfs::PresUnit::PSI));
   EXPECT_FLOAT_EQ(478.802589803358f, bfs::convpres(10.0f, bfs::PresUnit::PSF, bfs::PresUnit::PA));
+  EXPECT_FLOAT_EQ(4.78802589803358f, bfs::convpres(10.0f, bfs::PresUnit::PSF, bfs::PresUnit::HPA));
   EXPECT_FLOAT_EQ(10.0f, bfs::convpres(10.0f, bfs::PresUnit::PSF, bfs::PresUnit::PSF));
   EXPECT_FLOAT_EQ(0.00472541416040818f, bfs::convpres(10.0f, bfs::PresUnit::PSF, bfs::PresUnit::ATM));
 }
@@ -385,6 +395,7 @@ TEST(convpres, psf) {
 TEST(convpres, atm) {
   EXPECT_FLOAT_EQ(14.6959487755135f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::PSI));
   EXPECT_FLOAT_EQ(101325.0f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::PA));
+  EXPECT_FLOAT_EQ(1013.250f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::HPA));
   EXPECT_FLOAT_EQ(2116.21662367394f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::PSF));
   EXPECT_FLOAT_EQ(1.0f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::ATM));
 }
