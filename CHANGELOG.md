@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.3.0
+- Added hectopascals unit to convpres
+
 ## v3.2.0
 - Added atmospheric constants
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Units
-  VERSION 3.2.0
+  VERSION 3.3.0
   DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )

@@ -68,6 +68,7 @@ int main() {
   std::cout << "10 lb/ft^3 to lb/in^3: " << bfs::convdensity(10.0f, bfs::DensityUnit::LBMPFT3, bfs::DensityUnit::LBMPIN3) << std::endl;
   /* convpres */
   std::cout << "10 psi to Pa: " << bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::PA) << std::endl;
+  std::cout << "10 psi to hPa: " << bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::HPA) << std::endl;
   std::cout << "10 psi to psf: " << bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::PSF) << std::endl;
   std::cout << "10 psi to atm: " << bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::ATM) << std::endl;
   /* convtemp */

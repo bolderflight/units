@@ -33,6 +33,7 @@ namespace bfs {
 enum class PresUnit {
   PSI,  // pound force per square inch
   PA,   // Pascal
+  HPA,  // Hectopascal
   PSF,  // pound force per square foot
   ATM   // atmosphere
 };
@@ -60,6 +61,10 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
       in_val = val;
       break;
     }
+    case PresUnit::HPA: {
+      in_val = val * static_cast<T>(100.0);
+      break;
+    }
     case PresUnit::PSF: {
       in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665) /
                static_cast<T>(0.3048) / static_cast<T>(0.3048);
@@ -80,6 +85,10 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
     }
     case PresUnit::PA: {
       out_val = in_val;
+      break;
+    }
+    case PresUnit::HPA: {
+      out_val = in_val / static_cast<T>(100.0);
       break;
     }
     case PresUnit::PSF: {
