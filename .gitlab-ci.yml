@@ -8,19 +8,19 @@ Lint:
   tags:
     - bfs
   script: 
-    - cpplint --verbose=0 include/units/units.h
-    - cpplint --verbose=0 include/units/constants.h
-    - cpplint --verbose=0 include/units/convacc.h
-    - cpplint --verbose=0 include/units/convang.h
-    - cpplint --verbose=0 include/units/convangacc.h
-    - cpplint --verbose=0 include/units/convangvel.h
-    - cpplint --verbose=0 include/units/convdensity.h
-    - cpplint --verbose=0 include/units/convforce.h
-    - cpplint --verbose=0 include/units/convlength.h
-    - cpplint --verbose=0 include/units/convmass.h
-    - cpplint --verbose=0 include/units/convpres.h
-    - cpplint --verbose=0 include/units/convtemp.h
-    - cpplint --verbose=0 include/units/convvel.h
+    - cpplint --verbose=0 src/units.h
+    - cpplint --verbose=0 src/constants.h
+    - cpplint --verbose=0 src/convacc.h
+    - cpplint --verbose=0 src/convang.h
+    - cpplint --verbose=0 src/convangacc.h
+    - cpplint --verbose=0 src/convangvel.h
+    - cpplint --verbose=0 src/convdensity.h
+    - cpplint --verbose=0 src/convforce.h
+    - cpplint --verbose=0 src/convlength.h
+    - cpplint --verbose=0 src/convmass.h
+    - cpplint --verbose=0 src/convpres.h
+    - cpplint --verbose=0 src/convtemp.h
+    - cpplint --verbose=0 src/convvel.h
 
 Compile:
   stage: build

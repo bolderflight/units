@@ -23,67 +23,95 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVANGACC_H_
-#define INCLUDE_UNITS_CONVANGACC_H_
+#ifndef SRC_CONVANG_H_
+#define SRC_CONVANG_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
-#include "units/constants.h"
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+#include "constants.h"  // NOLINT
 
 namespace bfs {
-/* Units for measuring angular acceleration */
-enum class AngAccUnit {
-  DEGPS2,  // degrees per second per second, deg/s/s
-  RADPS2,  // radians per second per second, rad/s/s
-  RPMPS    // revolutions per minute per second, rpm/s
+/* Units for measuring angular positions */
+enum class AngPosUnit {
+  DEG,  // degree
+  RAD,  // radians
+  REV   // revolutions
 };
 /* 
-* Utility to convert between angular acceleration units:
+* Utility to convert between angle units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e.
-* 'convangacc(1, AngAccUnit::DEGPS2, AngAccUnit::RADPS2)'
-* converts 1 deg/s/s to rad/s/s.
+* you are converting to, i.e. 'convang(1, AngPosUnit::DEG, AngPosUnit::RAD)'
+* converts 1 deg to radians.
 */
 template<typename T>
-T convangacc(const T val, const AngAccUnit input, const AngAccUnit output) {
+T convang(const T val, const AngPosUnit input, const AngPosUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case AngAccUnit::DEGPS2: {
+    case AngPosUnit::DEG: {
       in_val = val * BFS_PI<T> / static_cast<T>(180);
       break;
     }
-    case AngAccUnit::RADPS2: {
+    case AngPosUnit::RAD: {
       in_val = val;
       break;
     }
-    case AngAccUnit::RPMPS: {
-      in_val = val * BFS_2PI<T> / static_cast<T>(60);
+    case AngPosUnit::REV: {
+      in_val = val * BFS_2PI<T>;
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case AngAccUnit::DEGPS2: {
+    case AngPosUnit::DEG: {
       out_val = in_val * static_cast<T>(180) / BFS_PI<T>;
       break;
     }
-    case AngAccUnit::RADPS2: {
+    case AngPosUnit::RAD: {
       out_val = in_val;
       break;
     }
-    case AngAccUnit::RPMPS: {
-      out_val = in_val / BFS_2PI<T> * static_cast<T>(60);
+    case AngPosUnit::REV: {
+      out_val = in_val / BFS_2PI<T>;
       break;
     }
   }
   return out_val;
 }
 
+/* rad to deg conversion */
+template<typename T>
+T rad2deg(const T val) {
+  return convang(val, AngPosUnit::RAD, AngPosUnit::DEG);
+}
+
+/* deg to rad conversion */
+template<typename T>
+T deg2rad(const T val) {
+  return convang(val, AngPosUnit::DEG, AngPosUnit::RAD);
+}
+
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVANGACC_H_
+#endif  // SRC_CONVANG_H_

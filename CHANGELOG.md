@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.0.0
+- Updated directory structure to support Arduino in addition to CMake builds
+- Added an Arduino example
+- Updated README
+
 ## v3.3.0
 - Added hectopascals unit to convpres
 

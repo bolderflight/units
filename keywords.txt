@@ -1,0 +1,7 @@
+RunningStats	KEYWORD1
+MovingWindowStats	KEYWORD1
+Update	KEYWORD2
+mean	KEYWORD2
+var	KEYWORD2
+std	KEYWORD2
+Clear	KEYWORD2

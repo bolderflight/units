@@ -23,86 +23,112 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVLENGTH_H_
-#define INCLUDE_UNITS_CONVLENGTH_H_
+#ifndef SRC_CONVACC_H_
+#define SRC_CONVACC_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
 
 namespace bfs {
-/* Units for measuring linear positions and length */
-enum class LinPosUnit {
-  FT,       // feet
-  M,        // meters
-  KM,       // kilometers
-  IN,       // inches
-  MI,       // miles
-  NAUT_MI   // nautical miles
+/* Units for measuring linear acceleration */
+enum class LinAccUnit {
+  FPS2,   // feet per second per second, ft/s/s
+  MPS2,   // meters per second per second, m/s/s
+  KPS2,   // kilometers per second per second, km/s/s
+  IPS2,   // inches per second per second, in/s/s
+  KPHPS,  // kilometers per hour per second, km/h/s
+  MPHPS,  // miles per hour per second, mi/h/s
+  G,      // G force acceleration, G
 };
 /* 
-* Utility to convert between linear position units:
+* Utility to convert between linear acceleration units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convlength(1, LinPosUnit::FT, LinPosUnit::M)'
-* converts 1 foot to meters.
+* you are converting to, i.e. 'convacc(1, LinAccUnit::G, LinAccUnit::MPS2)'
+* converts 1 G to m/s/s.
 */
 template<typename T>
-T convlength(const T val, const LinPosUnit input, const LinPosUnit output) {
+T convacc(const T val, const LinAccUnit input, const LinAccUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case LinPosUnit::FT: {
+    case LinAccUnit::FPS2: {
       in_val = val * static_cast<T>(0.3048);
       break;
     }
-    case LinPosUnit::M: {
+    case LinAccUnit::MPS2: {
       in_val = val;
       break;
     }
-    case LinPosUnit::KM: {
+    case LinAccUnit::KPS2: {
       in_val = val * static_cast<T>(1000);
       break;
     }
-    case LinPosUnit::IN: {
+    case LinAccUnit::IPS2: {
       in_val = val * static_cast<T>(0.0254);
       break;
     }
-    case LinPosUnit::MI: {
-      in_val = val * static_cast<T>(1609.344);
+    case LinAccUnit::KPHPS: {
+      in_val = val * static_cast<T>(1000) / static_cast<T>(3600);
       break;
     }
-    case LinPosUnit::NAUT_MI: {
-      in_val = val * static_cast<T>(1852);
+    case LinAccUnit::MPHPS: {
+      in_val = val * static_cast<T>(1609.344) / static_cast<T>(3600);
+      break;
+    }
+    case LinAccUnit::G: {
+      in_val = val * static_cast<T>(9.80665);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case LinPosUnit::FT: {
+    case LinAccUnit::FPS2: {
       out_val = in_val / static_cast<T>(0.3048);
       break;
     }
-    case LinPosUnit::M: {
+    case LinAccUnit::MPS2: {
       out_val = in_val;
       break;
     }
-    case LinPosUnit::KM: {
+    case LinAccUnit::KPS2: {
       out_val = in_val / static_cast<T>(1000);
       break;
     }
-    case LinPosUnit::IN: {
+    case LinAccUnit::IPS2: {
       out_val = in_val / static_cast<T>(0.0254);
       break;
     }
-    case LinPosUnit::MI: {
-      out_val = in_val / static_cast<T>(1609.344);
+    case LinAccUnit::KPHPS: {
+      out_val = in_val / static_cast<T>(1000) * static_cast<T>(3600);
       break;
     }
-    case LinPosUnit::NAUT_MI: {
-      out_val = in_val / static_cast<T>(1852);
+    case LinAccUnit::MPHPS: {
+      out_val = in_val / static_cast<T>(1609.344) * static_cast<T>(3600);
+      break;
+    }
+    case LinAccUnit::G: {
+      out_val = in_val / static_cast<T>(9.80665);
       break;
     }
   }
@@ -111,4 +137,4 @@ T convlength(const T val, const LinPosUnit input, const LinPosUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVLENGTH_H_
+#endif  // SRC_CONVACC_H_

@@ -23,72 +23,78 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVTEMP_H_
-#define INCLUDE_UNITS_CONVTEMP_H_
+#ifndef SRC_CONVANGACC_H_
+#define SRC_CONVANGACC_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+#include "constants.h"  // NOLINT
 
 namespace bfs {
-/* Units for measuring temperature */
-enum class TempUnit {
-  K,  // Kelvin
-  F,  // Fahrenheit
-  C,  // Celsius
-  R   // Rankine
+/* Units for measuring angular acceleration */
+enum class AngAccUnit {
+  DEGPS2,  // degrees per second per second, deg/s/s
+  RADPS2,  // radians per second per second, rad/s/s
+  RPMPS    // revolutions per minute per second, rpm/s
 };
 /* 
-* Utility to convert between temperature units:
+* Utility to convert between angular acceleration units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convtemp(1, TempUnit::F, TempUnit::C)'
-* converts 1 F to C.
+* you are converting to, i.e.
+* 'convangacc(1, AngAccUnit::DEGPS2, AngAccUnit::RADPS2)'
+* converts 1 deg/s/s to rad/s/s.
 */
 template<typename T>
-T convtemp(const T val, const TempUnit input, const TempUnit output) {
+T convangacc(const T val, const AngAccUnit input, const AngAccUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case TempUnit::K: {
-      in_val = val - static_cast<T>(273.15);
+    case AngAccUnit::DEGPS2: {
+      in_val = val * BFS_PI<T> / static_cast<T>(180);
       break;
     }
-    case TempUnit::F: {
-      in_val = (val - static_cast<T>(32)) * static_cast<T>(5) /
-               static_cast<T>(9);
-      break;
-    }
-    case TempUnit::C: {
+    case AngAccUnit::RADPS2: {
       in_val = val;
       break;
     }
-    case TempUnit::R: {
-      in_val = (val - static_cast<T>(491.67)) *
-               static_cast<T>(5) / static_cast<T>(9);
+    case AngAccUnit::RPMPS: {
+      in_val = val * BFS_2PI<T> / static_cast<T>(60);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case TempUnit::K: {
-      out_val = in_val + static_cast<T>(273.15);
+    case AngAccUnit::DEGPS2: {
+      out_val = in_val * static_cast<T>(180) / BFS_PI<T>;
       break;
     }
-    case TempUnit::F: {
-      out_val = in_val * static_cast<T>(9) / static_cast<T>(5) +
-                static_cast<T>(32);
-      break;
-    }
-    case TempUnit::C: {
+    case AngAccUnit::RADPS2: {
       out_val = in_val;
       break;
     }
-    case TempUnit::R: {
-      out_val = in_val * static_cast<T>(9) / static_cast<T>(5) +
-                static_cast<T>(491.67);
+    case AngAccUnit::RPMPS: {
+      out_val = in_val / BFS_2PI<T> * static_cast<T>(60);
       break;
     }
   }
@@ -97,4 +103,4 @@ T convtemp(const T val, const TempUnit input, const TempUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVTEMP_H_
+#endif  // SRC_CONVANGACC_H_

@@ -23,50 +23,76 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVFORCE_H_
-#define INCLUDE_UNITS_CONVFORCE_H_
+#ifndef SRC_CONVMASS_H_
+#define SRC_CONVMASS_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
 
 namespace bfs {
-/* Units for measuring force */
-enum class ForceUnit {
-  LBF,  // pound force
-  N     // Newton
+/* Units for measuring mass */
+enum class MassUnit {
+  LBM,  // pound mass
+  KG,   // kilograms
+  SLUG  // slugs
 };
 /* 
-* Utility to convert between force units:
+* Utility to convert between mass units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convforce(1, ForceUnit::LBF, ForceUnit::Newton)'
-* converts 1 lbf to N.
+* you are converting to, i.e. 'convmass(1, MassUnit::LBM, MassUnit::KG)'
+* converts 1 lbm to kg.
 */
 template<typename T>
-T convforce(const T val, const ForceUnit input, const ForceUnit output) {
+T convmass(const T val, const MassUnit input, const MassUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case ForceUnit::LBF: {
-      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665);
+    case MassUnit::LBM: {
+      in_val = val * static_cast<T>(0.45359237);
       break;
     }
-    case ForceUnit::N: {
+    case MassUnit::KG: {
       in_val = val;
+      break;
+    }
+    case MassUnit::SLUG: {
+      in_val = val * static_cast<T>(14.59390);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case ForceUnit::LBF: {
-      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665);
+    case MassUnit::LBM: {
+      out_val = in_val / static_cast<T>(0.45359237);
       break;
     }
-    case ForceUnit::N: {
+    case MassUnit::KG: {
       out_val = in_val;
+      break;
+    }
+    case MassUnit::SLUG: {
+      out_val = in_val / static_cast<T>(14.59390);
       break;
     }
   }
@@ -75,4 +101,4 @@ T convforce(const T val, const ForceUnit input, const ForceUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVFORCE_H_
+#endif  // SRC_CONVMASS_H_

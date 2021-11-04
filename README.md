@@ -1,14 +1,29 @@
-# units
-This library defines common constants and unit conversions.
+[![Pipeline](https://gitlab.com/bolderflight/software/units/badges/main/pipeline.svg)](https://gitlab.com/bolderflight/software/units/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+![Bolder Flight Systems Logo](img/logo-words_75.png) &nbsp; &nbsp; ![Arduino Logo](img/arduino_logo_75.png)
+
+# Units
+This library defines common constants and unit conversions, including linear and rotational acceleration, velocity, and position. It also includes conversions for force, density, mass, pressure, and temperature. Included constants are: PI, gravitational acceleration, standard day sea level temperature, standard day sea level pressure, standard day sea level speed of sound, the environmental lapse rate, the gas constant, and the molecular mass of air. This library is compatible with Arduino and with CMake build systems. It would also be easy to include with other projects, since it is a header only library.
    * [License](LICENSE.md)
    * [Changelog](CHANGELOG.md)
    * [Contributing guide](CONTRIBUTING.md)
 
-## Installation
+# Installation
+
+## Arduino
+Use the Arduino Library Manager to install this library or clone to your Arduino/libraries folder. This library is added as:
+
+```C++
+#include "units.h"
+```
+
+An example Arduino executable is located at *examples/arduino/units_example/units_example.ino*.
+
+## CMake
 CMake is used to build this library, which is exported as a library target called *units*. The header is added as:
 
-```
-#include "units/units.h"
+```C++
+#include "units.h"
 ```
 
 The library can be also be compiled stand-alone using the CMake idiom of creating a *build* directory and then, from within that directory issuing:
@@ -18,12 +33,12 @@ cmake ..
 make
 ```
 
-This will build the library, an example executable called *units_example*, and an executable for testing using the Google Test framework, called *units_test*. The example executable source file is located at *examples/units_example.cc*.
+This will build the library, an example executable called *units_example*, and an executable for testing using the Google Test framework, called *units_test*. The example executable source file is located at *examples/cmake/units_example.cc*.
 
 # Namespace
 This library is within the namespace *bfs*.
 
-## Constants
+# Constants
 pi and 2pi are defined as constants *BFS_PI* and *BFS_2PI* to avoid name conflicts with other potential definitions. These provide a consistent source for pi and 2pi across targets. Both are templated with a template parameter specifying the native type.
 
 ```C++
@@ -31,13 +46,13 @@ double my_pi = bfs::BFS_PI<double>;
 float my_2pi = bfs::BFS_2PI<float>;
 ```
 
-Gravitational acceleration is defined as constant *G_MPS2*. It is templated with a parameter specifying the native type.
+Gravitational acceleration (m/s/s) is defined as constant *G_MPS2*. It is templated with a parameter specifying the native type.
 
 ```C++
 double g_mps2 = bfs::G_MPS2<double>;
 ```
 
-Standard day sea level speed of sound, pressure, and temperature are defined as constants *SEA_LEVEL_SPEED_OF_SOUND_MPS*, *SEA_LEVEL_PRESSURE_PA*, *SEA_LEVEL_TEMPERATURE_C*, and *SEA_LEVEL_TEMPERATURE_K*. They are templated with a parameter specifying the native type.
+Standard day sea level speed of sound (m/s), pressure (Pa), and temperature(C, K) are defined as constants *SEA_LEVEL_SPEED_OF_SOUND_MPS*, *SEA_LEVEL_PRESSURE_PA*, *SEA_LEVEL_TEMPERATURE_C*, and *SEA_LEVEL_TEMPERATURE_K*. They are templated with a parameter specifying the native type.
 
 ```C++
 double a_mps = bfs::SEA_LEVEL_SPEED_OF_SOUND_MPS<double>;
@@ -46,20 +61,20 @@ double t0_c = bfs::SEA_LEVEL_TEMPERATURE_C<double>;
 double t0_k = bfs::SEA_LEVEL_TEMPERATURE_K<double>;
 ```
 
-Environmental lapse rate is defined as a constant *LAPSE_RATE_KPM*. It is templated with a parameter specifying the native type.
+Environmental lapse rate (K/m or C/m) is defined as a constant *LAPSE_RATE_KPM*. It is templated with a parameter specifying the native type.
 
 ```C++
 double l = bfs::LAPSE_RATE_KPM<double>;
 ```
 
-The gas constant and molecular mas of air are defined as constants *GAS_CONSTANT_JPKGMOL* and *MOLECULAR_MASS_AIR_KGPMOL*. They are templated with a parameter specifying the native type.
+The gas constant (J/(kg mol)) and molecular mas (kg/mol) of air are defined as constants *GAS_CONSTANT_JPKGMOL* and *MOLECULAR_MASS_AIR_KGPMOL*. They are templated with a parameter specifying the native type.
 
 ```C++
 double r = bfs::GAS_CONSTANT_JPKGMOL<double>;
 float m = bfs::MOLECULAR_MASS_AIR_KGPMOL<float>;
 ```
 
-## Conversions
+# Conversions
 
 **T convlength(T val, LinPosUnit input, LinPosUnit output)** converts *val* between *input* and *output* linear position units. This function is equivalent to the [MATLAB convlength](https://www.mathworks.com/help/aerotbx/ug/convlength.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
 
