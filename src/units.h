@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_UNITS_H_
-#define INCLUDE_UNITS_UNITS_H_
+#ifndef SRC_UNITS_H_
+#define SRC_UNITS_H_
 
 #include "constants.h"  // NOLINT
 #include "convlength.h"  // NOLINT
@@ -39,4 +39,4 @@
 #include "convpres.h"  // NOLINT
 #include "convtemp.h"  // NOLINT
 
-#endif  // INCLUDE_UNITS_UNITS_H_
+#endif  // SRC_UNITS_H_
