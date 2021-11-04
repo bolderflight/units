@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONSTANTS_H_
-#define INCLUDE_UNITS_CONSTANTS_H_
+#ifndef SRC_CONSTANTS_H_
+#define SRC_CONSTANTS_H_
 
 namespace bfs {
 /*
@@ -65,4 +65,4 @@ static constexpr T MOLECULAR_MASS_AIR_KGPMOL = static_cast<T>(0.0289644);
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONSTANTS_H_
+#endif  // SRC_CONSTANTS_H_

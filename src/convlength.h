@@ -23,59 +23,103 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVMASS_H_
-#define INCLUDE_UNITS_CONVMASS_H_
+#ifndef SRC_CONVLENGTH_H_
+#define SRC_CONVLENGTH_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
 
 namespace bfs {
-/* Units for measuring mass */
-enum class MassUnit {
-  LBM,  // pound mass
-  KG,   // kilograms
-  SLUG  // slugs
+/* Units for measuring linear positions and length */
+enum class LinPosUnit {
+  FT,       // feet
+  M,        // meters
+  KM,       // kilometers
+  IN,       // inches
+  MI,       // miles
+  NAUT_MI   // nautical miles
 };
 /* 
-* Utility to convert between mass units:
+* Utility to convert between linear position units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convmass(1, MassUnit::LBM, MassUnit::KG)'
-* converts 1 lbm to kg.
+* you are converting to, i.e. 'convlength(1, LinPosUnit::FT, LinPosUnit::M)'
+* converts 1 foot to meters.
 */
 template<typename T>
-T convmass(const T val, const MassUnit input, const MassUnit output) {
+T convlength(const T val, const LinPosUnit input, const LinPosUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case MassUnit::LBM: {
-      in_val = val * static_cast<T>(0.45359237);
+    case LinPosUnit::FT: {
+      in_val = val * static_cast<T>(0.3048);
       break;
     }
-    case MassUnit::KG: {
+    case LinPosUnit::M: {
       in_val = val;
       break;
     }
-    case MassUnit::SLUG: {
-      in_val = val * static_cast<T>(14.59390);
+    case LinPosUnit::KM: {
+      in_val = val * static_cast<T>(1000);
+      break;
+    }
+    case LinPosUnit::IN: {
+      in_val = val * static_cast<T>(0.0254);
+      break;
+    }
+    case LinPosUnit::MI: {
+      in_val = val * static_cast<T>(1609.344);
+      break;
+    }
+    case LinPosUnit::NAUT_MI: {
+      in_val = val * static_cast<T>(1852);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case MassUnit::LBM: {
-      out_val = in_val / static_cast<T>(0.45359237);
+    case LinPosUnit::FT: {
+      out_val = in_val / static_cast<T>(0.3048);
       break;
     }
-    case MassUnit::KG: {
+    case LinPosUnit::M: {
       out_val = in_val;
       break;
     }
-    case MassUnit::SLUG: {
-      out_val = in_val / static_cast<T>(14.59390);
+    case LinPosUnit::KM: {
+      out_val = in_val / static_cast<T>(1000);
+      break;
+    }
+    case LinPosUnit::IN: {
+      out_val = in_val / static_cast<T>(0.0254);
+      break;
+    }
+    case LinPosUnit::MI: {
+      out_val = in_val / static_cast<T>(1609.344);
+      break;
+    }
+    case LinPosUnit::NAUT_MI: {
+      out_val = in_val / static_cast<T>(1852);
       break;
     }
   }
@@ -84,4 +128,4 @@ T convmass(const T val, const MassUnit input, const MassUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVMASS_H_
+#endif  // SRC_CONVLENGTH_H_

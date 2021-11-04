@@ -23,7 +23,7 @@
 * IN THE SOFTWARE.
 */
 
-#include "units/units.h"
+#include "units.h"
 #include "gtest/gtest.h"
 
 /*** convlength ***/

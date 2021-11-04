@@ -23,81 +23,92 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVPRES_H_
-#define INCLUDE_UNITS_CONVPRES_H_
+#ifndef SRC_CONVDENSITY_H_
+#define SRC_CONVDENSITY_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
 
 namespace bfs {
-/* Units for measuring force */
-enum class PresUnit {
-  PSI,  // pound force per square inch
-  PA,   // Pascal
-  HPA,  // Hectopascal
-  PSF,  // pound force per square foot
-  ATM   // atmosphere
+/* Units for measuring density */
+enum class DensityUnit {
+  LBMPFT3,    // pound mass per feet cubed
+  KGPM3,      // kilogram per meters cubed
+  SLUGPFT3,   // slug per feet cubed
+  LBMPIN3     // pound mass per inch cubed
 };
 /* 
-* Utility to convert between pressure units:
+* Utility to convert between density units
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convpres(1, PresUnit::PSI, PresUnit::PA)'
-* converts 1 psf to Pa.
+* you are converting to,
+* i.e. 'convdensity(1, DensityUnit::LBMPFT3, DensityUnit::KGPM3)'
+* converts 1 lb/ft^3 to kg/m^3.
 */
 template<typename T>
-T convpres(const T val, const PresUnit input, const PresUnit output) {
+T convdensity(const T val, const DensityUnit input, const DensityUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case PresUnit::PSI: {
-      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665) /
-               static_cast<T>(0.0254) / static_cast<T>(0.0254);
-      break;
-    }
-    case PresUnit::PA: {
-      in_val = val;
-      break;
-    }
-    case PresUnit::HPA: {
-      in_val = val * static_cast<T>(100.0);
-      break;
-    }
-    case PresUnit::PSF: {
-      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665) /
+    case DensityUnit::LBMPFT3: {
+      in_val = val * static_cast<T>(0.45359237) / static_cast<T>(0.3048) /
                static_cast<T>(0.3048) / static_cast<T>(0.3048);
       break;
     }
-    case PresUnit::ATM: {
-      in_val = val * static_cast<T>(101325.0);
+    case DensityUnit::KGPM3: {
+      in_val = val;
+      break;
+    }
+    case DensityUnit::SLUGPFT3: {
+      in_val = val * static_cast<T>(14.59390) / static_cast<T>(0.3048) /
+               static_cast<T>(0.3048) / static_cast<T>(0.3048);
+      break;
+    }
+    case DensityUnit::LBMPIN3: {
+      in_val = val * static_cast<T>(0.45359237) / static_cast<T>(0.0254) /
+               static_cast<T>(0.0254) / static_cast<T>(0.0254);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case PresUnit::PSI: {
-      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665) *
-                static_cast<T>(0.0254) * static_cast<T>(0.0254);
-      break;
-    }
-    case PresUnit::PA: {
-      out_val = in_val;
-      break;
-    }
-    case PresUnit::HPA: {
-      out_val = in_val / static_cast<T>(100.0);
-      break;
-    }
-    case PresUnit::PSF: {
-      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665) *
+    case DensityUnit::LBMPFT3: {
+      out_val = in_val / static_cast<T>(0.45359237) * static_cast<T>(0.3048) *
                 static_cast<T>(0.3048) * static_cast<T>(0.3048);
       break;
     }
-    case PresUnit::ATM: {
-      out_val = in_val / static_cast<T>(101325.0);
+    case DensityUnit::KGPM3: {
+      out_val = in_val;
+      break;
+    }
+    case DensityUnit::SLUGPFT3: {
+      out_val = in_val / static_cast<T>(14.59390) * static_cast<T>(0.3048) *
+                static_cast<T>(0.3048) * static_cast<T>(0.3048);
+      break;
+    }
+    case DensityUnit::LBMPIN3: {
+      out_val = in_val / static_cast<T>(0.45359237) * static_cast<T>(0.0254) *
+                static_cast<T>(0.0254) * static_cast<T>(0.0254);
       break;
     }
   }
@@ -106,4 +117,4 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVPRES_H_
+#endif  // SRC_CONVDENSITY_H_

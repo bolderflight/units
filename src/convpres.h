@@ -23,95 +23,98 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVACC_H_
-#define INCLUDE_UNITS_CONVACC_H_
+#ifndef SRC_CONVPRES_H_
+#define SRC_CONVPRES_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
 
 namespace bfs {
-/* Units for measuring linear acceleration */
-enum class LinAccUnit {
-  FPS2,   // feet per second per second, ft/s/s
-  MPS2,   // meters per second per second, m/s/s
-  KPS2,   // kilometers per second per second, km/s/s
-  IPS2,   // inches per second per second, in/s/s
-  KPHPS,  // kilometers per hour per second, km/h/s
-  MPHPS,  // miles per hour per second, mi/h/s
-  G,      // G force acceleration, G
+/* Units for measuring force */
+enum class PresUnit {
+  PSI,  // pound force per square inch
+  PA,   // Pascal
+  HPA,  // Hectopascal
+  PSF,  // pound force per square foot
+  ATM   // atmosphere
 };
 /* 
-* Utility to convert between linear acceleration units:
+* Utility to convert between pressure units:
 * Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convacc(1, LinAccUnit::G, LinAccUnit::MPS2)'
-* converts 1 G to m/s/s.
+* you are converting to, i.e. 'convpres(1, PresUnit::PSI, PresUnit::PA)'
+* converts 1 psf to Pa.
 */
 template<typename T>
-T convacc(const T val, const LinAccUnit input, const LinAccUnit output) {
+T convpres(const T val, const PresUnit input, const PresUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
   T in_val;
   switch (input) {
-    case LinAccUnit::FPS2: {
-      in_val = val * static_cast<T>(0.3048);
+    case PresUnit::PSI: {
+      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665) /
+               static_cast<T>(0.0254) / static_cast<T>(0.0254);
       break;
     }
-    case LinAccUnit::MPS2: {
+    case PresUnit::PA: {
       in_val = val;
       break;
     }
-    case LinAccUnit::KPS2: {
-      in_val = val * static_cast<T>(1000);
+    case PresUnit::HPA: {
+      in_val = val * static_cast<T>(100.0);
       break;
     }
-    case LinAccUnit::IPS2: {
-      in_val = val * static_cast<T>(0.0254);
+    case PresUnit::PSF: {
+      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665) /
+               static_cast<T>(0.3048) / static_cast<T>(0.3048);
       break;
     }
-    case LinAccUnit::KPHPS: {
-      in_val = val * static_cast<T>(1000) / static_cast<T>(3600);
-      break;
-    }
-    case LinAccUnit::MPHPS: {
-      in_val = val * static_cast<T>(1609.344) / static_cast<T>(3600);
-      break;
-    }
-    case LinAccUnit::G: {
-      in_val = val * static_cast<T>(9.80665);
+    case PresUnit::ATM: {
+      in_val = val * static_cast<T>(101325.0);
       break;
     }
   }
   /* Convert to output */
   T out_val;
   switch (output) {
-    case LinAccUnit::FPS2: {
-      out_val = in_val / static_cast<T>(0.3048);
+    case PresUnit::PSI: {
+      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665) *
+                static_cast<T>(0.0254) * static_cast<T>(0.0254);
       break;
     }
-    case LinAccUnit::MPS2: {
+    case PresUnit::PA: {
       out_val = in_val;
       break;
     }
-    case LinAccUnit::KPS2: {
-      out_val = in_val / static_cast<T>(1000);
+    case PresUnit::HPA: {
+      out_val = in_val / static_cast<T>(100.0);
       break;
     }
-    case LinAccUnit::IPS2: {
-      out_val = in_val / static_cast<T>(0.0254);
+    case PresUnit::PSF: {
+      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665) *
+                static_cast<T>(0.3048) * static_cast<T>(0.3048);
       break;
     }
-    case LinAccUnit::KPHPS: {
-      out_val = in_val / static_cast<T>(1000) * static_cast<T>(3600);
-      break;
-    }
-    case LinAccUnit::MPHPS: {
-      out_val = in_val / static_cast<T>(1609.344) * static_cast<T>(3600);
-      break;
-    }
-    case LinAccUnit::G: {
-      out_val = in_val / static_cast<T>(9.80665);
+    case PresUnit::ATM: {
+      out_val = in_val / static_cast<T>(101325.0);
       break;
     }
   }
@@ -120,4 +123,4 @@ T convacc(const T val, const LinAccUnit input, const LinAccUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVACC_H_
+#endif  // SRC_CONVPRES_H_

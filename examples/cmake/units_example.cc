@@ -23,7 +23,7 @@
 * IN THE SOFTWARE.
 */
 
-#include "units/units.h"
+#include "units.h"
 #include <iostream>
 
 int main() {
@@ -73,6 +73,6 @@ int main() {
   std::cout << "10 psi to atm: " << bfs::convpres(10.0f, bfs::PresUnit::PSI, bfs::PresUnit::ATM) << std::endl;
   /* convtemp */
   std::cout << "300K to F: " << bfs::convtemp(300.0f, bfs::TempUnit::K, bfs::TempUnit::F) << std::endl;
-  std::cout << "300k to C: " << bfs::convtemp(300.0f, bfs::TempUnit::K, bfs::TempUnit::C) << std::endl;
+  std::cout << "300K to C: " << bfs::convtemp(300.0f, bfs::TempUnit::K, bfs::TempUnit::C) << std::endl;
   std::cout << "300K to R: " << bfs::convtemp(300.0f, bfs::TempUnit::K, bfs::TempUnit::R) << std::endl;
 }

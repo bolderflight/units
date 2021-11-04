@@ -1,19 +1,21 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Units
-  VERSION 3.3.0
+  VERSION 4.0.0
   DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )
+# Add definition that we're building with CMake
+add_definitions(-D__CMAKE__)
 # Add the library target
 add_library(units INTERFACE)
 # Setup include directories 
-target_include_directories(units INTERFACE include/)
+target_include_directories(units INTERFACE src/)
 
 # Example and unit testing if this project is built separately
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 	# Add the example target
-	add_executable(units_example examples/units_example.cc)
+	add_executable(units_example examples/cmake/units_example.cc)
 	# Add the includes
 	target_include_directories(units_example PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

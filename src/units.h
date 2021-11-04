@@ -26,17 +26,17 @@
 #ifndef INCLUDE_UNITS_UNITS_H_
 #define INCLUDE_UNITS_UNITS_H_
 
-#include "units/constants.h"
-#include "units/convlength.h"
-#include "units/convvel.h"
-#include "units/convacc.h"
-#include "units/convang.h"
-#include "units/convangvel.h"
-#include "units/convangacc.h"
-#include "units/convforce.h"
-#include "units/convmass.h"
-#include "units/convdensity.h"
-#include "units/convpres.h"
-#include "units/convtemp.h"
+#include "constants.h"  // NOLINT
+#include "convlength.h"  // NOLINT
+#include "convvel.h"  // NOLINT
+#include "convacc.h"  // NOLINT
+#include "convang.h"  // NOLINT
+#include "convangvel.h"  // NOLINT
+#include "convangacc.h"  // NOLINT
+#include "convforce.h"  // NOLINT
+#include "convmass.h"  // NOLINT
+#include "convdensity.h"  // NOLINT
+#include "convpres.h"  // NOLINT
+#include "convtemp.h"  // NOLINT
 
 #endif  // INCLUDE_UNITS_UNITS_H_

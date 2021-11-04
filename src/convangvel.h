@@ -23,11 +23,26 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef INCLUDE_UNITS_CONVANGVEL_H_
-#define INCLUDE_UNITS_CONVANGVEL_H_
+#ifndef SRC_CONVANGVEL_H_
+#define SRC_CONVANGVEL_H_
 
+/* Arduino IDE built */
+#if defined(ARDUINO) && !defined(__CMAKE__)
+/* Arduino AVR board */
+#if defined(__AVR__)
+#include <Arduino.h>
+/* Arduino ARM board */
+#else
+#include <Arduino.h>
 #include <type_traits>
-#include "units/constants.h"
+#define __TYPE_TRAITS__
+#endif
+/* Built by CMake or used in another build system */
+#else
+#include <type_traits>
+#define __TYPE_TRAITS__
+#endif
+#include "constants.h"  // NOLINT
 
 namespace bfs {
 /* Units for measuring angular velocity */
@@ -45,8 +60,10 @@ enum class AngVelUnit {
 */
 template<typename T>
 T convangvel(const T val, const AngVelUnit input, const AngVelUnit output) {
+  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
+  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
@@ -86,4 +103,4 @@ T convangvel(const T val, const AngVelUnit input, const AngVelUnit output) {
 
 }  // namespace bfs
 
-#endif  // INCLUDE_UNITS_CONVANGVEL_H_
+#endif  // SRC_CONVANGVEL_H_
