@@ -74,7 +74,7 @@ double r = bfs::GAS_CONSTANT_JPKGMOL<double>;
 float m = bfs::MOLECULAR_MASS_AIR_KGPMOL<float>;
 ```
 
-## Conversions
+# Conversions
 
 **T convlength(T val, LinPosUnit input, LinPosUnit output)** converts *val* between *input* and *output* linear position units. This function is equivalent to the [MATLAB convlength](https://www.mathworks.com/help/aerotbx/ug/convlength.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
 
