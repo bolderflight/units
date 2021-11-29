@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.0.1
+- Updated preprocessor directives to more easily define when Arduino IDE is used
+- Updated README to better detail the Arduino support
+- Fixed Arduino keywords.txt
+
 ## v4.0.0
 - Updated directory structure to support Arduino in addition to CMake builds
 - Added an Arduino example

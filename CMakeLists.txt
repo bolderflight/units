@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 # Project information
 project(Units
-  VERSION 4.0.0
+  VERSION 4.0.1
   DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )
-# Add definition that we're building with CMake
-add_definitions(-D__CMAKE__)
 # Add the library target
 add_library(units INTERFACE)
 # Setup include directories 
