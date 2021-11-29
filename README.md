@@ -3,7 +3,26 @@
 ![Bolder Flight Systems Logo](img/logo-words_75.png) &nbsp; &nbsp; ![Arduino Logo](img/arduino_logo_75.png)
 
 # Units
-This library defines common constants and unit conversions, including linear and rotational acceleration, velocity, and position. It also includes conversions for force, density, mass, pressure, and temperature. Included constants are: PI, gravitational acceleration, standard day sea level temperature, standard day sea level pressure, standard day sea level speed of sound, the environmental lapse rate, the gas constant, and the molecular mass of air. This library is compatible with Arduino and with CMake build systems. It would also be easy to include with other projects, since it is a header only library.
+This library defines common unit conversions, including:
+   * Linear acceleration, velocity, and position
+   * Rotational acceleration, velocity, and position
+   * Force
+   * Density
+   * Mass
+   * Pressure
+   * Temperature
+
+Included constants are: 
+   * Pi
+   * Gravitational acceleration
+   * Standard day sea level temperature
+   * Standard day sea level pressure
+   * Standard day sea level speed of sound
+   * Standard day lapse rate
+   * Gas constant
+   * Molecular mass of air
+
+This library is compatible with Arduino ARM and with CMake build systems. It would also be easy to include with other projects, since it is a header only library.
    * [License](LICENSE.md)
    * [Changelog](CHANGELOG.md)
    * [Contributing guide](CONTRIBUTING.md)
@@ -17,7 +36,7 @@ Use the Arduino Library Manager to install this library or clone to your Arduino
 #include "units.h"
 ```
 
-An example Arduino executable is located at *examples/arduino/units_example/units_example.ino*.
+An example Arduino executable is located at *examples/arduino/units_example/units_example.ino*. Teensy 3.x, 4.x, and LC devices are used for testing under Arduino and this library should be compatible with other ARM devices. This library is *not* expected to work on AVR devices.
 
 ## CMake
 CMake is used to build this library, which is exported as a library target called *units*. The header is added as:

@@ -26,22 +26,10 @@
 #ifndef SRC_CONVANG_H_
 #define SRC_CONVANG_H_
 
-/* Arduino IDE built */
-#if defined(ARDUINO) && !defined(__CMAKE__)
-/* Arduino AVR board */
-#if defined(__AVR__)
+#if defined(ARDUINO)
 #include <Arduino.h>
-/* Arduino ARM board */
-#else
-#include <Arduino.h>
-#include <type_traits>
-#define __TYPE_TRAITS__
 #endif
-/* Built by CMake or used in another build system */
-#else
 #include <type_traits>
-#define __TYPE_TRAITS__
-#endif
 #include "constants.h"  // NOLINT
 
 namespace bfs {
@@ -59,10 +47,8 @@ enum class AngPosUnit {
 */
 template<typename T>
 T convang(const T val, const AngPosUnit input, const AngPosUnit output) {
-  #if defined(__TYPE_TRAITS__)
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
-  #endif
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
