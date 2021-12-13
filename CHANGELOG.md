@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.0.2
+- Improved resolution of PI
+
 ## v4.0.1
 - Updated preprocessor directives to more easily define when Arduino IDE is used
 - Updated README to better detail the Arduino support
