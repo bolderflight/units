@@ -34,10 +34,11 @@ namespace bfs {
 * and provide a consistent source for PI across targets.
 */
 template<typename T>
-static constexpr T BFS_PI = static_cast<T>(3.14159265358979323846);
+static constexpr T BFS_PI =
+  static_cast<T>(3.14159265358979323846264338327950288);
 template<typename T>
 static constexpr T BFS_2PI = static_cast<T>(2) *
-                             static_cast<T>(3.14159265358979323846);
+  static_cast<T>(3.14159265358979323846264338327950288);
 /* Gravitational Acceleration */
 template<typename T>
 static constexpr T G_MPS2 = static_cast<T>(9.80665);
