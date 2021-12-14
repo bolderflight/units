@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.0.3
+- Updated minimum CMake version to 3.14 to support FetchContent_MakeAvailable
+
 ## v4.0.2
 - Improved resolution of PI
 
