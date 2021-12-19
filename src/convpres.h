@@ -38,7 +38,8 @@ enum class PresUnit {
   PA,   // Pascal
   HPA,  // Hectopascal
   PSF,  // pound force per square foot
-  ATM   // atmosphere
+  ATM,  // atmosphere
+  MBAR  // millibar
 };
 /* 
 * Utility to convert between pressure units:
@@ -77,6 +78,10 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
       in_val = val * static_cast<T>(101325.0);
       break;
     }
+    case PresUnit::MBAR: {
+      in_val = val * static_cast<T>(100.0);
+      break;
+    }
   }
   /* Convert to output */
   T out_val;
@@ -101,6 +106,10 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
     }
     case PresUnit::ATM: {
       out_val = in_val / static_cast<T>(101325.0);
+      break;
+    }
+    case PresUnit::MBAR: {
+      out_val = in_val / static_cast<T>(100.0);
       break;
     }
   }

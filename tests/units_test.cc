@@ -399,6 +399,11 @@ TEST(convpres, atm) {
   EXPECT_FLOAT_EQ(2116.21662367394f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::PSF));
   EXPECT_FLOAT_EQ(1.0f, bfs::convpres(1.0f, bfs::PresUnit::ATM, bfs::PresUnit::ATM));
 }
+/* mbar */
+TEST(convpres, mbar) {
+  EXPECT_FLOAT_EQ(1.0f, bfs::convpres(100.0f, bfs::PresUnit::PA, bfs::PresUnit::MBAR));
+  EXPECT_FLOAT_EQ(10000.0f, bfs::convpres(100.0f, bfs::PresUnit::MBAR, bfs::PresUnit::PA));
+}
 /*** convtemp ***/
 /* k */
 TEST(convtemp, k) {

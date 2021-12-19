@@ -247,6 +247,7 @@ float dens_kgpm3 = bfs::convdensity(1.0f, bfs::DensityUnit::LBMPFT3, bfs::Densit
 | HPA   | Hectopascal                 |
 | PSF   | pound force per square foot |
 | ATM   | atmosphere                  |
+| MBAR  | millibar                    |
 
 ```C++
 /* Convert 1 psi to pa */
