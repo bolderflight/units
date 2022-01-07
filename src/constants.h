@@ -42,27 +42,6 @@ static constexpr T BFS_2PI = static_cast<T>(2) *
 /* Gravitational Acceleration */
 template<typename T>
 static constexpr T G_MPS2 = static_cast<T>(9.80665);
-/* Standard day sea level speed of sound, m/s */
-template<typename T>
-static constexpr T SEA_LEVEL_SPEED_OF_SOUND_MPS = static_cast<T>(340.29);
-/* Standard day sea level pressure, Pa */
-template<typename T>
-static constexpr T SEA_LEVEL_PRESSURE_PA = static_cast<T>(101325.0);
-/* Standard day sea level temperature, C */
-template<typename T>
-static constexpr T SEA_LEVEL_TEMPERATURE_C = static_cast<T>(15.0);
-/* Standard day sea level temperature, K */
-template<typename T>
-static constexpr T SEA_LEVEL_TEMPERATURE_K = static_cast<T>(288.15);
-/* Environmental lapse rate K/m */
-template<typename T>
-static constexpr T LAPSE_RATE_KPM = static_cast<T>(0.0065);
-/* Gas constant J/kg-mol */
-template<typename T>
-static constexpr T GAS_CONSTANT_JPKGMOL = static_cast<T>(8.31446261815324);
-/* Molecular mass of air, kg/mol */
-template<typename T>
-static constexpr T MOLECULAR_MASS_AIR_KGPMOL = static_cast<T>(0.0289644);
 
 }  // namespace bfs
 

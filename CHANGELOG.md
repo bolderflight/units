@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.1.0
+- Moved airdata specific constants to the airdata library
+
 ## v4.0.4
 - Added millibar
 
