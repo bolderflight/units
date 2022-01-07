@@ -71,28 +71,6 @@ Gravitational acceleration (m/s/s) is defined as constant *G_MPS2*. It is templa
 double g_mps2 = bfs::G_MPS2<double>;
 ```
 
-Standard day sea level speed of sound (m/s), pressure (Pa), and temperature(C, K) are defined as constants *SEA_LEVEL_SPEED_OF_SOUND_MPS*, *SEA_LEVEL_PRESSURE_PA*, *SEA_LEVEL_TEMPERATURE_C*, and *SEA_LEVEL_TEMPERATURE_K*. They are templated with a parameter specifying the native type.
-
-```C++
-double a_mps = bfs::SEA_LEVEL_SPEED_OF_SOUND_MPS<double>;
-double p0_pa = bfs::SEA_LEVEL_PRESSURE_PA<double>;
-double t0_c = bfs::SEA_LEVEL_TEMPERATURE_C<double>;
-double t0_k = bfs::SEA_LEVEL_TEMPERATURE_K<double>;
-```
-
-Environmental lapse rate (K/m or C/m) is defined as a constant *LAPSE_RATE_KPM*. It is templated with a parameter specifying the native type.
-
-```C++
-double l = bfs::LAPSE_RATE_KPM<double>;
-```
-
-The gas constant (J/(kg mol)) and molecular mas (kg/mol) of air are defined as constants *GAS_CONSTANT_JPKGMOL* and *MOLECULAR_MASS_AIR_KGPMOL*. They are templated with a parameter specifying the native type.
-
-```C++
-double r = bfs::GAS_CONSTANT_JPKGMOL<double>;
-float m = bfs::MOLECULAR_MASS_AIR_KGPMOL<float>;
-```
-
 # Conversions
 
 **T convlength(T val, LinPosUnit input, LinPosUnit output)** converts *val* between *input* and *output* linear position units. This function is equivalent to the [MATLAB convlength](https://www.mathworks.com/help/aerotbx/ug/convlength.html) for scalar inputs. The function is templated to output using the same native type as the input - only floating point types are supported. Available units are:
