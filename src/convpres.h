@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2021 Bolder Flight Systems Inc
+* Copyright (c) 2022 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef SRC_CONVPRES_H_
-#define SRC_CONVPRES_H_
+#ifndef UNITS_SRC_CONVPRES_H_  // NOLINT
+#define UNITS_SRC_CONVPRES_H_
 
 #if defined(ARDUINO)
 #include <Arduino.h>
@@ -118,4 +118,4 @@ T convpres(const T val, const PresUnit input, const PresUnit output) {
 
 }  // namespace bfs
 
-#endif  // SRC_CONVPRES_H_
+#endif  // UNITS_SRC_CONVPRES_H_ NOLINT

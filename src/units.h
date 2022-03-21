@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2021 Bolder Flight Systems Inc
+* Copyright (c) 2022 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef SRC_UNITS_H_
-#define SRC_UNITS_H_
+#ifndef UNITS_SRC_UNITS_H_  // NOLINT
+#define UNITS_SRC_UNITS_H_
 
 #include "constants.h"  // NOLINT
 #include "convlength.h"  // NOLINT
@@ -39,4 +39,4 @@
 #include "convpres.h"  // NOLINT
 #include "convtemp.h"  // NOLINT
 
-#endif  // SRC_UNITS_H_
+#endif  // UNITS_SRC_UNITS_H_ NOLINT

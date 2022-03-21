@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef SRC_CONVDENSITY_H_
-#define SRC_CONVDENSITY_H_
+#ifndef UNITS_SRC_CONVDENSITY_H_  // NOLINT
+#define UNITS_SRC_CONVDENSITY_H_
 
 #if defined(ARDUINO)
 #include <Arduino.h>
@@ -103,4 +103,4 @@ T convdensity(const T val, const DensityUnit input, const DensityUnit output) {
 
 }  // namespace bfs
 
-#endif  // SRC_CONVDENSITY_H_
+#endif  // UNITS_SRC_CONVDENSITY_H_ NOLINT
