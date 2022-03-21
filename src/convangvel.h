@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2021 Bolder Flight Systems Inc
+* Copyright (c) 2022 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -23,8 +23,8 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef SRC_CONVANGVEL_H_
-#define SRC_CONVANGVEL_H_
+#ifndef UNITS_SRC_CONVANGVEL_H_  // NOLINT
+#define UNITS_SRC_CONVANGVEL_H_
 
 #if defined(ARDUINO)
 #include <Arduino.h>
@@ -89,4 +89,4 @@ T convangvel(const T val, const AngVelUnit input, const AngVelUnit output) {
 
 }  // namespace bfs
 
-#endif  // SRC_CONVANGVEL_H_
+#endif  // UNITS_SRC_CONVANGVEL_H_ NOLINT

@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.1.1
+- Updated include guards
+
 ## v4.1.0
 - Moved airdata specific constants to the airdata library
 
