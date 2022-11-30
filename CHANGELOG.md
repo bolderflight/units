@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.2.0
+- Made constexpr
+
 ## v4.1.2
 - Updated google test to latest release
 

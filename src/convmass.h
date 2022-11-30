@@ -45,7 +45,7 @@ enum class MassUnit {
 * converts 1 lbm to kg.
 */
 template<typename T>
-T convmass(const T val, const MassUnit input, const MassUnit output) {
+constexpr T convmass(const T val, const MassUnit input, const MassUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */

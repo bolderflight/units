@@ -44,7 +44,8 @@ enum class ForceUnit {
 * converts 1 lbf to N.
 */
 template<typename T>
-T convforce(const T val, const ForceUnit input, const ForceUnit output) {
+constexpr T convforce(const T val, const ForceUnit input,
+                      const ForceUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */

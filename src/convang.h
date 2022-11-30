@@ -46,7 +46,8 @@ enum class AngPosUnit {
 * converts 1 deg to radians.
 */
 template<typename T>
-T convang(const T val, const AngPosUnit input, const AngPosUnit output) {
+constexpr T convang(const T val, const AngPosUnit input,
+                    const AngPosUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */
@@ -88,13 +89,13 @@ T convang(const T val, const AngPosUnit input, const AngPosUnit output) {
 
 /* rad to deg conversion */
 template<typename T>
-T rad2deg(const T val) {
+constexpr T rad2deg(const T val) {
   return convang(val, AngPosUnit::RAD, AngPosUnit::DEG);
 }
 
 /* deg to rad conversion */
 template<typename T>
-T deg2rad(const T val) {
+constexpr T deg2rad(const T val) {
   return convang(val, AngPosUnit::DEG, AngPosUnit::RAD);
 }
 

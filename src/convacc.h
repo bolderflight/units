@@ -49,7 +49,8 @@ enum class LinAccUnit {
 * converts 1 G to m/s/s.
 */
 template<typename T>
-T convacc(const T val, const LinAccUnit input, const LinAccUnit output) {
+constexpr T convacc(const T val, const LinAccUnit input,
+                    const LinAccUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */

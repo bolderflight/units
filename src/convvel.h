@@ -50,7 +50,8 @@ enum class LinVelUnit {
 * converts 1 ft/s to m/s.
 */
 template<typename T>
-T convvel(const T val, const LinVelUnit input, const LinVelUnit output) {
+constexpr T convvel(const T val, const LinVelUnit input,
+                    const LinVelUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */
