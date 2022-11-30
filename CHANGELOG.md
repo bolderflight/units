@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.1.2
+- Updated google test to latest release
+
 ## v4.1.1
 - Updated include guards
 

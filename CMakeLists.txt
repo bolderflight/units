@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 # Project information
 project(Units
-  VERSION 4.1.1
+  VERSION 4.1.2
   DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )
@@ -29,7 +29,7 @@ if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
   FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.10.0
+    GIT_TAG release-1.12.1
   )
   FetchContent_MakeAvailable(googletest)
   enable_testing()
