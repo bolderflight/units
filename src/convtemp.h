@@ -46,7 +46,7 @@ enum class TempUnit {
 * converts 1 F to C.
 */
 template<typename T>
-constexpr T convtemp(const T val, const TempUnit input, const TempUnit output) {
+T convtemp(const T val, const TempUnit input, const TempUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */

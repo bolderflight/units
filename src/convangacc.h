@@ -47,7 +47,7 @@ enum class AngAccUnit {
 * converts 1 deg/s/s to rad/s/s.
 */
 template<typename T>
-constexpr T convangacc(const T val, const AngAccUnit input,
+T convangacc(const T val, const AngAccUnit input,
                        const AngAccUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");

@@ -47,7 +47,7 @@ enum class DensityUnit {
 * converts 1 lb/ft^3 to kg/m^3.
 */
 template<typename T>
-constexpr T convdensity(const T val, const DensityUnit input,
+T convdensity(const T val, const DensityUnit input,
                         const DensityUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");

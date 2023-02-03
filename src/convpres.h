@@ -48,7 +48,7 @@ enum class PresUnit {
 * converts 1 psf to Pa.
 */
 template<typename T>
-constexpr T convpres(const T val, const PresUnit input, const PresUnit output) {
+T convpres(const T val, const PresUnit input, const PresUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
   /* Trivial case where input and output units are the same */

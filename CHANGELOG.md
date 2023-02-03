@@ -1,5 +1,8 @@
 # Changelog
 
+## v4.2.1
+- Needed to remove constexpr for Arduino compatibility
+
 ## v4.2.0
 - Made constexpr
 

@@ -47,7 +47,7 @@ enum class AngVelUnit {
 * converts 1 deg/s to rad/s.
 */
 template<typename T>
-constexpr T convangvel(const T val, const AngVelUnit input,
+T convangvel(const T val, const AngVelUnit input,
                        const AngVelUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");

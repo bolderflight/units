@@ -48,7 +48,7 @@ enum class LinPosUnit {
 * converts 1 foot to meters.
 */
 template<typename T>
-constexpr T convlength(const T val, const LinPosUnit input,
+T convlength(const T val, const LinPosUnit input,
                        const LinPosUnit output) {
   static_assert(std::is_floating_point<T>::value,
               "Only floating point types supported");
