@@ -35,7 +35,6 @@
 namespace bfs {
 
 float convmass(const float val, const MassUnit input, const MassUnit output) {
-
   /* Trivial case where input and output units are the same */
   if (input == output) {return val;}
   /* Convert input to SI */
