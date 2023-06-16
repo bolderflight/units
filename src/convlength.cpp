@@ -30,7 +30,7 @@
 #include <cstdint>
 #endif
 
-#include "convlength.h"
+#include "convlength.h"  // NOLINT
 
 namespace bfs {
 
