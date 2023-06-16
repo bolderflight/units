@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Copyright (c) 2023 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -28,13 +28,14 @@
 
 #if defined(ARDUINO)
 #include <Arduino.h>
+#else
+#include <cstddef>
+#include <cstdint>
 #endif
-#include <type_traits>
-#include "constants.h"  // NOLINT
 
 namespace bfs {
 /* Units for measuring angular positions */
-enum class AngPosUnit {
+enum class AngPosUnit : int8_t {
   DEG,  // degree
   RAD,  // radians
   REV   // revolutions
@@ -45,59 +46,18 @@ enum class AngPosUnit {
 * you are converting to, i.e. 'convang(1, AngPosUnit::DEG, AngPosUnit::RAD)'
 * converts 1 deg to radians.
 */
-template<typename T>
-T convang(const T val, const AngPosUnit input,
-                    const AngPosUnit output) {
-  static_assert(std::is_floating_point<T>::value,
-              "Only floating point types supported");
-  /* Trivial case where input and output units are the same */
-  if (input == output) {return val;}
-  /* Convert input to SI */
-  T in_val;
-  switch (input) {
-    case AngPosUnit::DEG: {
-      in_val = val * BFS_PI<T> / static_cast<T>(180);
-      break;
-    }
-    case AngPosUnit::RAD: {
-      in_val = val;
-      break;
-    }
-    case AngPosUnit::REV: {
-      in_val = val * BFS_2PI<T>;
-      break;
-    }
-  }
-  /* Convert to output */
-  T out_val;
-  switch (output) {
-    case AngPosUnit::DEG: {
-      out_val = in_val * static_cast<T>(180) / BFS_PI<T>;
-      break;
-    }
-    case AngPosUnit::RAD: {
-      out_val = in_val;
-      break;
-    }
-    case AngPosUnit::REV: {
-      out_val = in_val / BFS_2PI<T>;
-      break;
-    }
-  }
-  return out_val;
-}
+float convang(const float val, const AngPosUnit input,
+              const AngPosUnit output);
+double convang(const double val, const AngPosUnit input,
+               const AngPosUnit output);
 
 /* rad to deg conversion */
-template<typename T>
-T rad2deg(const T val) {
-  return convang(val, AngPosUnit::RAD, AngPosUnit::DEG);
-}
+float rad2deg(const float val);
+double rad2deg(const double val);
 
 /* deg to rad conversion */
-template<typename T>
-T deg2rad(const T val) {
-  return convang(val, AngPosUnit::DEG, AngPosUnit::RAD);
-}
+float deg2rad(const float val);
+double deg2rad(const double val);
 
 }  // namespace bfs
 

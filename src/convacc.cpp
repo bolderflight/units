@@ -23,9 +23,6 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef UNITS_SRC_CONVACC_H_  // NOLINT
-#define UNITS_SRC_CONVACC_H_
-
 #if defined(ARDUINO)
 #include <Arduino.h>
 #else
@@ -33,17 +30,10 @@
 #include <cstdint>
 #endif
 
+#include "convacc.h"  // NOLINT
+
 namespace bfs {
-/* Units for measuring linear acceleration */
-enum class LinAccUnit : int8_t {
-  FPS2,   // feet per second per second, ft/s/s
-  MPS2,   // meters per second per second, m/s/s
-  KPS2,   // kilometers per second per second, km/s/s
-  IPS2,   // inches per second per second, in/s/s
-  KPHPS,  // kilometers per hour per second, km/h/s
-  MPHPS,  // miles per hour per second, mi/h/s
-  G,      // G force acceleration, G
-};
+
 /* 
 * Utility to convert between linear acceleration units:
 * Input the value to convert, the unit the value is currently in, and the unit
@@ -51,8 +41,74 @@ enum class LinAccUnit : int8_t {
 * converts 1 G to m/s/s.
 */
 float convacc(const float val, const LinAccUnit input,
-              const LinAccUnit output);
+              const LinAccUnit output) {
+  /* Trivial case where input and output units are the same */
+  if (input == output) {return val;}
+  /* Convert input to SI */
+  float in_val;
+  switch (input) {
+    case LinAccUnit::FPS2: {
+      in_val = val * 0.3048f;
+      break;
+    }
+    case LinAccUnit::MPS2: {
+      in_val = val;
+      break;
+    }
+    case LinAccUnit::KPS2: {
+      in_val = val * 1000.0f;
+      break;
+    }
+    case LinAccUnit::IPS2: {
+      in_val = val * 0.0254f;
+      break;
+    }
+    case LinAccUnit::KPHPS: {
+      in_val = val * 1000.0f / 3600.0f;
+      break;
+    }
+    case LinAccUnit::MPHPS: {
+      in_val = val * 1609.344f / 3600.0f;
+      break;
+    }
+    case LinAccUnit::G: {
+      in_val = val * 9.80665f;
+      break;
+    }
+  }
+  /* Convert to output */
+  float out_val;
+  switch (output) {
+    case LinAccUnit::FPS2: {
+      out_val = in_val / 0.3048f;
+      break;
+    }
+    case LinAccUnit::MPS2: {
+      out_val = in_val;
+      break;
+    }
+    case LinAccUnit::KPS2: {
+      out_val = in_val / 1000.0f;
+      break;
+    }
+    case LinAccUnit::IPS2: {
+      out_val = in_val / 0.0254f;
+      break;
+    }
+    case LinAccUnit::KPHPS: {
+      out_val = in_val / 1000.0f * 3600.0f;
+      break;
+    }
+    case LinAccUnit::MPHPS: {
+      out_val = in_val / 1609.344f * 3600.0f;
+      break;
+    }
+    case LinAccUnit::G: {
+      out_val = in_val / 9.80665f;
+      break;
+    }
+  }
+  return out_val;
+}
 
 }  // namespace bfs
-
-#endif  // UNITS_SRC_CONVACC_H_ NOLINT

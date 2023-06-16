@@ -21,6 +21,18 @@ Lint:
     - cpplint --verbose=0 src/convpres.h
     - cpplint --verbose=0 src/convtemp.h
     - cpplint --verbose=0 src/convvel.h
+    - cpplint --verbose=0 src/constants.cpp
+    - cpplint --verbose=0 src/convacc.cpp
+    - cpplint --verbose=0 src/convang.cpp
+    - cpplint --verbose=0 src/convangacc.cpp
+    - cpplint --verbose=0 src/convangvel.cpp
+    - cpplint --verbose=0 src/convdensity.cpp
+    - cpplint --verbose=0 src/convforce.cpp
+    - cpplint --verbose=0 src/convlength.cpp
+    - cpplint --verbose=0 src/convmass.cpp
+    - cpplint --verbose=0 src/convpres.cpp
+    - cpplint --verbose=0 src/convtemp.cpp
+    - cpplint --verbose=0 src/convvel.cpp
 
 Compile:
   stage: build

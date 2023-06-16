@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Copyright (c) 2023 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -28,13 +28,16 @@
 
 #if defined(ARDUINO)
 #include <Arduino.h>
+#else
+#include <cstddef>
+#include <cstdint>
 #endif
-#include <type_traits>
+
 #include "constants.h"  // NOLINT
 
 namespace bfs {
 /* Units for measuring angular velocity */
-enum class AngVelUnit {
+enum class AngVelUnit : int8_t {
   DEGPS,  // degrees per second, deg/s
   RADPS,  // radians per second, rad/s
   RPM     // revolutions per minute, rpm
@@ -46,47 +49,8 @@ enum class AngVelUnit {
 * 'convangvel(1, AngVelUnit::DEGPS, AngVelUnit::RADPS)'
 * converts 1 deg/s to rad/s.
 */
-template<typename T>
-T convangvel(const T val, const AngVelUnit input,
-                       const AngVelUnit output) {
-  static_assert(std::is_floating_point<T>::value,
-              "Only floating point types supported");
-  /* Trivial case where input and output units are the same */
-  if (input == output) {return val;}
-  /* Convert input to SI */
-  T in_val;
-  switch (input) {
-    case AngVelUnit::DEGPS: {
-      in_val = val * BFS_PI<T> / static_cast<T>(180);
-      break;
-    }
-    case AngVelUnit::RADPS: {
-      in_val = val;
-      break;
-    }
-    case AngVelUnit::RPM: {
-      in_val = val * BFS_2PI<T> / static_cast<T>(60);
-      break;
-    }
-  }
-  /* Convert to output */
-  T out_val;
-  switch (output) {
-    case AngVelUnit::DEGPS: {
-      out_val = in_val * static_cast<T>(180) / BFS_PI<T>;
-      break;
-    }
-    case AngVelUnit::RADPS: {
-      out_val = in_val;
-      break;
-    }
-    case AngVelUnit::RPM: {
-      out_val = in_val / BFS_2PI<T> * static_cast<T>(60);
-      break;
-    }
-  }
-  return out_val;
-}
+float convangvel(const float val, const AngVelUnit input,
+                 const AngVelUnit output);
 
 }  // namespace bfs
 

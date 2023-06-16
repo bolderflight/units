@@ -23,9 +23,6 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef UNITS_SRC_CONVVEL_H_  // NOLINT
-#define UNITS_SRC_CONVVEL_H_
-
 #if defined(ARDUINO)
 #include <Arduino.h>
 #else
@@ -33,27 +30,55 @@
 #include <cstdint>
 #endif
 
+#include "convdensity.h"  // NOLINT
+
 namespace bfs {
-/* Units for measuring linear velocity */
-enum class LinVelUnit : int8_t {
-  FPS,  // feet per second, ft/s
-  MPS,  // meters per second, m/s
-  KPS,  // kilometers per second, km/s
-  IPS,  // inches per second. in/s
-  KPH,  // kilometers per hour, km/h
-  MPH,  // miles per hour, mi/h
-  KTS,  // knots
-  FPM   // feet per minute, ft/min
-};
-/* 
-* Utility to convert between linear velocity units:
-* Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convvel(1, LinVelUnit::FPS, LinVelUnit::MPS)'
-* converts 1 ft/s to m/s.
-*/
-float convvel(const float val, const LinVelUnit input,
-              const LinVelUnit output);
+
+float convdensity(const float val, const DensityUnit input,
+                  const DensityUnit output) {
+  /* Trivial case where input and output units are the same */
+  if (input == output) {return val;}
+  /* Convert input to SI */
+  float in_val;
+  switch (input) {
+    case DensityUnit::LBMPFT3: {
+      in_val = val * 0.45359237f / 0.3048f / 0.3048f / 0.3048f;
+      break;
+    }
+    case DensityUnit::KGPM3: {
+      in_val = val;
+      break;
+    }
+    case DensityUnit::SLUGPFT3: {
+      in_val = val * 14.59390f / 0.3048f / 0.3048f / 0.3048f;
+      break;
+    }
+    case DensityUnit::LBMPIN3: {
+      in_val = val * 0.45359237f / 0.0254f / 0.0254f / 0.0254f;
+      break;
+    }
+  }
+  /* Convert to output */
+  float out_val;
+  switch (output) {
+    case DensityUnit::LBMPFT3: {
+      out_val = in_val / 0.45359237f * 0.3048f * 0.3048f * 0.3048f;
+      break;
+    }
+    case DensityUnit::KGPM3: {
+      out_val = in_val;
+      break;
+    }
+    case DensityUnit::SLUGPFT3: {
+      out_val = in_val / 14.59390f * 0.3048f * 0.3048f * 0.3048f;
+      break;
+    }
+    case DensityUnit::LBMPIN3: {
+      out_val = in_val / 0.45359237f * 0.0254f * 0.0254f * 0.0254f;
+      break;
+    }
+  }
+  return out_val;
+}
 
 }  // namespace bfs
-
-#endif  // UNITS_SRC_CONVVEL_H_ NOLINT

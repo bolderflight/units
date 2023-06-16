@@ -1,12 +1,37 @@
 cmake_minimum_required(VERSION 3.14)
 # Project information
 project(Units
-  VERSION 4.2.1
+  VERSION 5.0.0
   DESCRIPTION "Constants and unit conversions."
   LANGUAGES CXX
 )
 # Add the library target
-add_library(units INTERFACE)
+add_library(units
+  src/units.h
+  src/constants.h
+  src/convacc.h
+  src/convang.h
+  src/convangacc.h
+  src/convangvel.h
+  src/convdensity.h
+  src/convforce.h
+  src/convlength.h
+  src/convmass.h
+  src/convpres.h
+  src/convtemp.h
+  src/convvel.h
+  src/convacc.cpp
+  src/convang.cpp
+  src/convangacc.cpp
+  src/convangvel.cpp
+  src/convdensity.cpp
+  src/convforce.cpp
+  src/convlength.cpp
+  src/convmass.cpp
+  src/convpres.cpp
+  src/convtemp.cpp
+  src/convvel.cpp
+)
 # Setup include directories 
 target_include_directories(units INTERFACE src/)
 

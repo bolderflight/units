@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Copyright (c) 2023 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -28,12 +28,14 @@
 
 #if defined(ARDUINO)
 #include <Arduino.h>
+#else
+#include <cstddef>
+#include <cstdint>
 #endif
-#include <type_traits>
 
 namespace bfs {
 /* Units for measuring force */
-enum class ForceUnit {
+enum class ForceUnit : int8_t {
   LBF,  // pound force
   N     // Newton
 };
@@ -43,39 +45,8 @@ enum class ForceUnit {
 * you are converting to, i.e. 'convforce(1, ForceUnit::LBF, ForceUnit::Newton)'
 * converts 1 lbf to N.
 */
-template<typename T>
-T convforce(const T val, const ForceUnit input,
-                      const ForceUnit output) {
-  static_assert(std::is_floating_point<T>::value,
-              "Only floating point types supported");
-  /* Trivial case where input and output units are the same */
-  if (input == output) {return val;}
-  /* Convert input to SI */
-  T in_val;
-  switch (input) {
-    case ForceUnit::LBF: {
-      in_val = val * static_cast<T>(0.45359237) * static_cast<T>(9.80665);
-      break;
-    }
-    case ForceUnit::N: {
-      in_val = val;
-      break;
-    }
-  }
-  /* Convert to output */
-  T out_val;
-  switch (output) {
-    case ForceUnit::LBF: {
-      out_val = in_val / static_cast<T>(0.45359237) / static_cast<T>(9.80665);
-      break;
-    }
-    case ForceUnit::N: {
-      out_val = in_val;
-      break;
-    }
-  }
-  return out_val;
-}
+float convforce(const float val, const ForceUnit input,
+                const ForceUnit output);
 
 }  // namespace bfs
 

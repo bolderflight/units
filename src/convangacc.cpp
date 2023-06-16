@@ -23,9 +23,6 @@
 * IN THE SOFTWARE.
 */
 
-#ifndef UNITS_SRC_CONVVEL_H_  // NOLINT
-#define UNITS_SRC_CONVVEL_H_
-
 #if defined(ARDUINO)
 #include <Arduino.h>
 #else
@@ -33,27 +30,48 @@
 #include <cstdint>
 #endif
 
+#include "convangacc.h"  // NOLINT
+#include "constants.h"  // NOLINT
+
 namespace bfs {
-/* Units for measuring linear velocity */
-enum class LinVelUnit : int8_t {
-  FPS,  // feet per second, ft/s
-  MPS,  // meters per second, m/s
-  KPS,  // kilometers per second, km/s
-  IPS,  // inches per second. in/s
-  KPH,  // kilometers per hour, km/h
-  MPH,  // miles per hour, mi/h
-  KTS,  // knots
-  FPM   // feet per minute, ft/min
-};
-/* 
-* Utility to convert between linear velocity units:
-* Input the value to convert, the unit the value is currently in, and the unit
-* you are converting to, i.e. 'convvel(1, LinVelUnit::FPS, LinVelUnit::MPS)'
-* converts 1 ft/s to m/s.
-*/
-float convvel(const float val, const LinVelUnit input,
-              const LinVelUnit output);
+
+float convangacc(const float val, const AngAccUnit input,
+                 const AngAccUnit output) {
+  /* Trivial case where input and output units are the same */
+  if (input == output) {return val;}
+  /* Convert input to SI */
+  float in_val;
+  switch (input) {
+    case AngAccUnit::DEGPS2: {
+      in_val = val * BFS_PI_FLOAT / 180.0f;
+      break;
+    }
+    case AngAccUnit::RADPS2: {
+      in_val = val;
+      break;
+    }
+    case AngAccUnit::RPMPS: {
+      in_val = val * BFS_2PI_FLOAT / 60.0f;
+      break;
+    }
+  }
+  /* Convert to output */
+  float out_val;
+  switch (output) {
+    case AngAccUnit::DEGPS2: {
+      out_val = in_val * 180.0f / BFS_PI_FLOAT;
+      break;
+    }
+    case AngAccUnit::RADPS2: {
+      out_val = in_val;
+      break;
+    }
+    case AngAccUnit::RPMPS: {
+      out_val = in_val / BFS_2PI_FLOAT * 60.0f;
+      break;
+    }
+  }
+  return out_val;
+}
 
 }  // namespace bfs
-
-#endif  // UNITS_SRC_CONVVEL_H_ NOLINT

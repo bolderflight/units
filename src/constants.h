@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Copyright (c) 2023 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -33,15 +33,14 @@ namespace bfs {
 * their ecosystem. We're using BFS_PI and BFS_2PI to avoid naming conflicts
 * and provide a consistent source for PI across targets.
 */
-template<typename T>
-static constexpr T BFS_PI =
-  static_cast<T>(3.14159265358979323846264338327950288);
-template<typename T>
-static constexpr T BFS_2PI = static_cast<T>(2) *
-  static_cast<T>(3.14159265358979323846264338327950288);
+static constexpr float BFS_PI_FLOAT = 3.14159265358979323846264338327950288f;
+static constexpr float BFS_2PI_FLOAT = 2.0f *
+                                       3.14159265358979323846264338327950288f;
+static constexpr double BFS_PI_DOUBLE = 3.14159265358979323846264338327950288;
+static constexpr double BFS_2PI_DOUBLE = 2.0 *
+                                         3.14159265358979323846264338327950288;
 /* Gravitational Acceleration */
-template<typename T>
-static constexpr T G_MPS2 = static_cast<T>(9.80665);
+static constexpr float G_MPS2 = 9.80665f;
 
 }  // namespace bfs
 

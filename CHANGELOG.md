@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.0.0
+- Moving to a header and source library for improved compile times
+- Reducing the number of templated and instead overloading float and double
+
 ## v4.2.1
 - Needed to remove constexpr for Arduino compatibility
 

@@ -2,7 +2,7 @@
 * Brian R Taylor
 * brian.taylor@bolderflight.com
 * 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Copyright (c) 2023 Bolder Flight Systems Inc
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
@@ -28,12 +28,14 @@
 
 #if defined(ARDUINO)
 #include <Arduino.h>
+#else
+#include <cstddef>
+#include <cstdint>
 #endif
-#include <type_traits>
 
 namespace bfs {
 /* Units for measuring linear positions and length */
-enum class LinPosUnit {
+enum class LinPosUnit : int8_t {
   FT,       // feet
   M,        // meters
   KM,       // kilometers
@@ -47,71 +49,10 @@ enum class LinPosUnit {
 * you are converting to, i.e. 'convlength(1, LinPosUnit::FT, LinPosUnit::M)'
 * converts 1 foot to meters.
 */
-template<typename T>
-T convlength(const T val, const LinPosUnit input,
-                       const LinPosUnit output) {
-  static_assert(std::is_floating_point<T>::value,
-              "Only floating point types supported");
-  /* Trivial case where input and output units are the same */
-  if (input == output) {return val;}
-  /* Convert input to SI */
-  T in_val;
-  switch (input) {
-    case LinPosUnit::FT: {
-      in_val = val * static_cast<T>(0.3048);
-      break;
-    }
-    case LinPosUnit::M: {
-      in_val = val;
-      break;
-    }
-    case LinPosUnit::KM: {
-      in_val = val * static_cast<T>(1000);
-      break;
-    }
-    case LinPosUnit::IN: {
-      in_val = val * static_cast<T>(0.0254);
-      break;
-    }
-    case LinPosUnit::MI: {
-      in_val = val * static_cast<T>(1609.344);
-      break;
-    }
-    case LinPosUnit::NAUT_MI: {
-      in_val = val * static_cast<T>(1852);
-      break;
-    }
-  }
-  /* Convert to output */
-  T out_val;
-  switch (output) {
-    case LinPosUnit::FT: {
-      out_val = in_val / static_cast<T>(0.3048);
-      break;
-    }
-    case LinPosUnit::M: {
-      out_val = in_val;
-      break;
-    }
-    case LinPosUnit::KM: {
-      out_val = in_val / static_cast<T>(1000);
-      break;
-    }
-    case LinPosUnit::IN: {
-      out_val = in_val / static_cast<T>(0.0254);
-      break;
-    }
-    case LinPosUnit::MI: {
-      out_val = in_val / static_cast<T>(1609.344);
-      break;
-    }
-    case LinPosUnit::NAUT_MI: {
-      out_val = in_val / static_cast<T>(1852);
-      break;
-    }
-  }
-  return out_val;
-}
+float convlength(const float val, const LinPosUnit input,
+                 const LinPosUnit output);
+double convlength(const double val, const LinPosUnit input,
+                  const LinPosUnit output);
 
 }  // namespace bfs
 
